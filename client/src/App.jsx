@@ -1,7 +1,11 @@
+import { Header } from './components/Header'
+import { Prew } from './components/Prew'
+
 export function App () {
   return (
     <>
-      <h1 className="text-3xl font-bold underline" >NashRealt</h1>
+      <Header />
+      <Prew />
     </>
   )
 }
