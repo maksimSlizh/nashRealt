@@ -19,11 +19,18 @@ class NewsController {
   }
 
   async getAll(req, res) {
-    const newsAll = await News.findAll()
+    let {limit, page} = req.query
+    page = page || 1
+    limit = limit || 9
+    let offset = page * limit - limit
+    const newsAll = await News.findAndCountAll({limit, offset})
     return res.json(newsAll)
   }
 
   async getOne(req, res) {
+    const {id} = req.params
+    const news = await News.findOne({where: {id}})
+    return res.json(news)
 
   }
 }
