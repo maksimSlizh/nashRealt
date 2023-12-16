@@ -1,11 +1,12 @@
-import { Header } from './components/Header'
-import { Prew } from './components/Prew'
+import { BrowserRouter } from 'react-router-dom'
+import { AppRouter } from './components/AppRouter'
 
-export function App () {
+export function App() {
   return (
     <>
-      <Header />
-      <Prew />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </>
   )
 }

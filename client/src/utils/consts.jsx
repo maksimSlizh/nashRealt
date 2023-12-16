@@ -1,0 +1,8 @@
+export const ADMIN_ROUTE = '/admin'
+export const LOGIN_ROUTE = '/login'
+export const REGISTRATION_ROUTE = '/registration'
+export const NEWS_ROUTE = '/news'
+export const PREW_ROUTE = '/prew'
+export const INSURENCES_ROUTE = '/insurances'
+export const REALTY_ROUTE = '/realty'
+export const CONTACTS_ROUTE = '/contacts'

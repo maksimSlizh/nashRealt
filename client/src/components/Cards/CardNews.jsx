@@ -1,4 +1,4 @@
-export function NewsCard() {
+export function CardNews() {
   return (
     <div className="card" style="width: 18rem;">
       <img src="..." className="card-img-top" alt="..." />
