@@ -1,10 +1,17 @@
-import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { setIsAuth } from '../../redux/userSlice'
 import logo from '../../assets/img/logo.jpg'
-import { CONTACTS_ROUTE, INSURENCES_ROUTE, NEWS_ROUTE, PREW_ROUTE, REALTY_ROUTE } from '../../utils/consts'
+import { CONTACTS_ROUTE, INSURENCES_ROUTE, NEWS_ROUTE, PREW_ROUTE, REALTY_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE } from '../../utils/consts'
 
 export function Navbar() {
   const { isAuth, user } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  function handleAuth() {
+    dispatch(setIsAuth(true))
+  }
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -33,8 +40,8 @@ export function Navbar() {
                 <NavLink className="nav-link " to={CONTACTS_ROUTE} >Contacts</NavLink>
               </li>
             </ul>
-            <button className="btn btn-outline-success" type="submit">Admin</button>
-            <button className="btn btn-outline-success" type="submit">Sign up</button>
+            <button className="btn btn-outline-success" onClick={() => navigate(ADMIN_ROUTE)} type="submit">Admin</button>
+            <button className="btn btn-outline-success" onClick={() => navigate(LOGIN_ROUTE)} type="submit">Sign out</button>
             </>
             :
             <>
@@ -56,7 +63,10 @@ export function Navbar() {
                 <NavLink className="nav-link " to={CONTACTS_ROUTE} >Contacts</NavLink>
               </li>
             </ul>
-            <button className="btn btn-outline-success" type="submit">Sign in</button>
+            <button className="btn btn-outline-success" type="submit" onClick={() => {
+              handleAuth()
+              console.log(isAuth)
+            }}>Sign in</button>
             </>
             }
           </div>

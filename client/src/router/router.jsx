@@ -2,6 +2,7 @@ import { ADMIN_ROUTE, PREW_ROUTE, NEWS_ROUTE, INSURENCES_ROUTE, REALTY_ROUTE, CO
 import { Admin} from '../pages/Admin'
 import { Prew } from '../pages/Prew'
 import { News } from '../pages/News'
+import { NewsCard } from '../pages/NewsCard'
 import { Insurances } from '../pages/Insurances'
 import { Realty } from '../pages/Realty'
 import { Contacts } from '../pages/Contacts'
@@ -29,8 +30,12 @@ export const publicRoutes = [
     Component: Auth,
   },
   {
-    path: NEWS_ROUTE + '/:id',
+    path: NEWS_ROUTE,
     Component: News,
+  },
+  {
+    path: NEWS_ROUTE + '/:id',
+    Component: NewsCard,
   },
   {
     path: INSURENCES_ROUTE,

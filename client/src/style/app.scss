@@ -1,2 +1,8 @@
 @import "bootstrap/scss/bootstrap";
 
+.hover-effect {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
