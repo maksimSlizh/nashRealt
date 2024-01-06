@@ -1,7 +1,7 @@
 import { $authHost, $host } from './index'
 
-export const createNews = async (news) => {
-  const {data} = await $authHost.post('api/news', news)
+export const createNews = async (formData) => {
+  const {data} = await $authHost.post('api/news', formData)
   return data
 }
 

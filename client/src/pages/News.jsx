@@ -13,7 +13,7 @@ export function News() {
   return (
     <div>
       <h1>News</h1>
-      <div className='d-flex justify-content-between align-items-center'> {news.map(el => {
+      <div className='d-flex justify-content-between align-items-center flex-column'> {news.map(el => {
         return <CardNews key={el.id} {...el} />
       })} </div>
 
