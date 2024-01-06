@@ -1,9 +1,15 @@
-import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 import { CardNews } from '../components/Cards/CardNews'
+import { fetchNews } from '../redux/newsSlice'
 
 export function News() {
   const { news } = useSelector(state => state.news)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchNews())
+  }, [dispatch])
   return (
     <div>
       <h1>News</h1>

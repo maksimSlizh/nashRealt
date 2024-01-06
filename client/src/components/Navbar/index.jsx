@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { setIsAuth } from '../../redux/userSlice'
+import { setIsAuth, setUser } from '../../redux/userSlice'
 import logo from '../../assets/img/logo.jpg'
 import { CONTACTS_ROUTE, INSURENCES_ROUTE, NEWS_ROUTE, PREW_ROUTE, REALTY_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE } from '../../utils/consts'
 
@@ -9,9 +9,13 @@ export function Navbar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  function handleAuth() {
-    dispatch(setIsAuth(true))
+  function logOut() {
+    localStorage.removeItem('token')
+    dispatch(setUser({}))
+    dispatch(setIsAuth(false))
+    navigate(PREW_ROUTE)
   }
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -41,7 +45,7 @@ export function Navbar() {
               </li>
             </ul>
             <button className="btn btn-outline-success" onClick={() => navigate(ADMIN_ROUTE)} type="submit">Admin</button>
-            <button className="btn btn-outline-success" onClick={() => navigate(LOGIN_ROUTE)} type="submit">Sign out</button>
+            <button className="btn btn-outline-success" onClick={() => logOut()} type="submit">Sign out</button>
             </>
             :
             <>
@@ -64,8 +68,7 @@ export function Navbar() {
               </li>
             </ul>
             <button className="btn btn-outline-success" type="submit" onClick={() => {
-              handleAuth()
-              console.log(isAuth)
+              navigate(LOGIN_ROUTE)
             }}>Sign in</button>
             </>
             }
