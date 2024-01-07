@@ -7,7 +7,7 @@ const generateJwt = (id, email, role) => {
   return jwt.sign(
     { id, email, role },
     process.env.SECRET_KEY,
-    { expiresIn: '24h' }
+    { expiresIn: '12h' }
   )
 }
 
@@ -48,12 +48,13 @@ class UserController {
       return next(ApiError.internal('Указан неверный пароль'))
     }
     const token = generateJwt(user.id, user.email, user.role)
-    return res.json({token})
+    return res.json({token, role: user.role})
   }
 
   async check(req, res, next) {
-    const token = generateJwt(req.user.id, req.user.email, req.user.role)
-    return res.json({token})
+    const { id, email, role } = req.user
+    const token = generateJwt(id, email, role)
+    return res.json({ id, email, role, token })
   }
 }
 

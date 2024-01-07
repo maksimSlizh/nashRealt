@@ -14,3 +14,8 @@ export const requestOneNews = async (id) => {
   const {data} = await $host.get('api/news/' + id)
   return data
 }
+
+export const deleteNews = async (id) => {
+  const {data} = await $authHost.delete('api/news' + '/' + id)
+  return data
+}

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
 import { setIsAuth, setUser } from '../../redux/userSlice'
 import logo from '../../assets/img/logo.jpg'
 import { CONTACTS_ROUTE, INSURENCES_ROUTE, NEWS_ROUTE, PREW_ROUTE, REALTY_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE } from '../../utils/consts'
@@ -8,6 +9,15 @@ export function Navbar() {
   const { isAuth, user } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  let userRole = ''
+
+  if(token) {
+    const decodedToken = jwtDecode(token)
+    userRole = decodedToken.role
+  }
+
+
 
   function logOut() {
     localStorage.removeItem('token')
@@ -44,7 +54,11 @@ export function Navbar() {
                 <NavLink className="nav-link " to={CONTACTS_ROUTE} >Contacts</NavLink>
               </li>
             </ul>
-            <button className="btn btn-outline-success" onClick={() => navigate(ADMIN_ROUTE)} type="submit">Admin</button>
+            {isAuth && userRole === 'ADMIN' && (
+              <button className="btn btn-outline-success" type="submit" onClick={() => {
+                navigate(ADMIN_ROUTE)
+              }}>Admin</button>
+            )}
             <button className="btn btn-outline-success" onClick={() => logOut()} type="submit">Sign out</button>
             </>
             :
