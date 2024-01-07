@@ -1,8 +1,9 @@
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
 import { requestNews, requestOneNews } from '../http/newsApi'
 
-export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
-  const data = await requestNews()
+export const fetchNews = createAsyncThunk('news/fetchNews', async ({page = 1}, {getState}) => {
+  const { limit } = getState().news
+  const data = await requestNews(page, limit)
   return data
 })
 
@@ -14,6 +15,9 @@ export const fetchOneNews = createAsyncThunk('news/fetchOneNews', async (id) => 
 const initialState = {
   news: [],
   oneNews: {},
+  page: 1,
+  totalCount: 0,
+  limit: 5,
   loading: false,
   error: null,
 }
@@ -31,6 +35,7 @@ export const newsSlice = createSlice({
       .addCase(fetchNews.fulfilled, (state, action) => {
         state.loading = false
         state.news = action.payload.rows
+        state.totalCount = action.payload.count
       })
       .addCase(fetchNews.rejected, (state, action) => {
         state.loading = false

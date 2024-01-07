@@ -31,7 +31,7 @@ export function Navbar() {
                 <NavLink className="nav-link active" to={PREW_ROUTE}>Main</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to={NEWS_ROUTE}>News</NavLink>
+                <NavLink className="nav-link" to={`${NEWS_ROUTE}/1`}>News</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to={INSURENCES_ROUTE}>

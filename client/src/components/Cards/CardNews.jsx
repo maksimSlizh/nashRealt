@@ -8,7 +8,7 @@ export function CardNews(props) {
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
           <p className="card-text">{props.description}</p>
-          <NavLink to={NEWS_ROUTE + '/' + props.id} className="btn btn-primary">Go somewhere</NavLink>
+          <NavLink to={NEWS_ROUTE + '/selected' + '/' + props.id} className="btn btn-primary">Go somewhere</NavLink>
         </div>
     </div>
   )

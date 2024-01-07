@@ -30,11 +30,11 @@ export const publicRoutes = [
     Component: Auth,
   },
   {
-    path: NEWS_ROUTE,
+    path: NEWS_ROUTE + '/:page',
     Component: News,
   },
   {
-    path: NEWS_ROUTE + '/:id',
+    path: NEWS_ROUTE + '/selected' + '/:id',
     Component: NewsCard,
   },
   {

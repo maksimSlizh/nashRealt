@@ -5,8 +5,8 @@ export const createNews = async (formData) => {
   return data
 }
 
-export const requestNews = async () => {
-  const {data} = await $host.get('api/news')
+export const requestNews = async (page, limit) => {
+  const {data} = await $host.get('api/news', {params: {page, limit}})
   return data
 }
 
