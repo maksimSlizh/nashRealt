@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createRealty, requestRealties, requestOneRealty, deleteRealty } from '../http/realtyApi';
+import { requestRealties, requestOneRealty} from '../http/realtyApi';
 
 export const fetchRealties = createAsyncThunk('realty/fetchRealties', async (_, { getState }) => {
   const { page, limit } = getState().realty;
@@ -9,11 +9,6 @@ export const fetchRealties = createAsyncThunk('realty/fetchRealties', async (_, 
 
 export const fetchOneRealty = createAsyncThunk('realty/fetchOneRealty', async (id) => {
   const data = await requestOneRealty(id);
-  return data;
-});
-
-export const deleteOneRealty = createAsyncThunk('realty/deleteOneRealty', async (id) => {
-  const data = await deleteRealty(id);
   return data;
 });
 
@@ -39,7 +34,7 @@ export const realtySlice = createSlice({
       })
       .addCase(fetchRealties.fulfilled, (state, action) => {
         state.loading = false;
-        state.realties = action.payload.rows;
+        state.realties = action.payload;
         state.totalCount = action.payload.count;
       })
       .addCase(fetchRealties.rejected, (state, action) => {
@@ -58,18 +53,6 @@ export const realtySlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(deleteOneRealty.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(deleteOneRealty.fulfilled, (state, action) => {
-        state.loading = false;
-        // Можно обновить список недвижимости после удаления
-      })
-      .addCase(deleteOneRealty.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
   },
 });
 

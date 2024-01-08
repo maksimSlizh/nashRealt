@@ -48,7 +48,7 @@ export function Navbar() {
                   Insurance</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link " to={REALTY_ROUTE} >Realty</NavLink>
+                <NavLink className="nav-link " to={`${REALTY_ROUTE}/1`} >Realty</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link " to={CONTACTS_ROUTE} >Contacts</NavLink>
@@ -75,7 +75,7 @@ export function Navbar() {
                   Insurance</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link " to={REALTY_ROUTE} >Realty</NavLink>
+                <NavLink className="nav-link " to={`${REALTY_ROUTE}/1`} >Realty</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link " to={CONTACTS_ROUTE} >Contacts</NavLink>

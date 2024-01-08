@@ -42,7 +42,7 @@ export const publicRoutes = [
     Component: Insurances,
   },
   {
-    path: REALTY_ROUTE,
+    path: REALTY_ROUTE  + '/:page',
     Component: Realty,
   },
   {
