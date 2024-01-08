@@ -9,9 +9,13 @@ export function CardNews(props) {
   const { isAuth } = useSelector(state => state.user)
   const dispatch = useDispatch()
 
+  let userRole = ''
   const token = localStorage.getItem('token')
-  const decodedToken = jwtDecode(token)
-  const userRole = decodedToken.role
+
+  if(token) {
+    const decodedToken = jwtDecode(token)
+    userRole = decodedToken.role
+  }
 
   const handleDelete = async (id) => {
     try {

@@ -6,12 +6,14 @@ import { AppRouter } from './components/AppRouter'
 import { checkAuth } from './http/userApi'
 import { setIsAuth, setUser } from './redux/userSlice'
 import { Spinner } from 'react-bootstrap'
+import { fetchNews } from './redux/newsSlice'
 
 export function App() {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    dispatch(fetchNews({ page: 1 }))
     const fetchUser = async () => {
       try {
         const { data } = await checkAuth()
