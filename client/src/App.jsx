@@ -30,7 +30,7 @@ export function App() {
   }, [])
 
   if (loading) {
-    return <Spinner animation={"grow"} />
+    return <Spinner animation="border" variant="success" />
   }
   return (
     <BrowserRouter>

@@ -26,7 +26,7 @@ export function InsuranceComponent() {
             </ul>
             <Button
             className="mt-auto"
-            variant="primary"
+            variant="outline-info"
             onClick={() => navigate(INSURANCES_ROUTE)}>Узнать больше</Button>
           </div>
           <img src={insurance} alt="" style={{ width: '50%'}} height={'40%'} />

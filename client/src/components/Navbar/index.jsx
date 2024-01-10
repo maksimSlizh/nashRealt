@@ -58,7 +58,7 @@ export function NavbarComponent() {
   }
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" fixed="top" className="mb-5">
+    <Navbar expand="lg" fixed="top" className="mb-5 custom-navbar">
       <Container>
         <Navbar.Brand as={NavLink} to={PREW_ROUTE}>
           <img src={logo} alt="logo" style={{ width: '50px', height: 'auto' }} />
@@ -67,19 +67,19 @@ export function NavbarComponent() {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" in={showOffcanvas}>
           <Nav>
             <Nav.Link as={NavLink} to={PREW_ROUTE} className="nav-link" onClick={closeOffcanvas}>
-              Main
+              Главная
             </Nav.Link>
             <Nav.Link as={NavLink} to={`${NEWS_ROUTE}/1`} className="nav-link" onClick={closeOffcanvas}>
-              News
+              Новости
             </Nav.Link>
             <Nav.Link as={NavLink} to={INSURANCES_ROUTE} className="nav-link" onClick={closeOffcanvas}>
-              Insurance
+              Страхование
             </Nav.Link>
             <Nav.Link as={NavLink} to={`${REALTY_ROUTE}/1`} className="nav-link" onClick={closeOffcanvas}>
-              Realty
+              Недвижимость
             </Nav.Link>
             <Nav.Link as={NavLink} to={CONTACTS_ROUTE} className="nav-link" onClick={closeOffcanvas}>
-              Contacts
+              Контакты
             </Nav.Link>
             {isAuth && userRole === 'ADMIN' && (
               <Nav.Link as={NavLink} to={ADMIN_ROUTE} className="nav-link" onClick={closeOffcanvas}>
@@ -88,11 +88,11 @@ export function NavbarComponent() {
             )}
             {isAuth ? (
               <Button variant="outline-success" onClick={logOut} >
-                Sign out
+                Выйти
               </Button>
             ) : (
               <Button variant="outline-success" as={NavLink} to={LOGIN_ROUTE} onClick={closeOffcanvas}>
-                Sign in
+                Войти
               </Button>
             )}
           </Nav>

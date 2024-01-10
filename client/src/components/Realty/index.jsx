@@ -2,7 +2,11 @@ import { NavLink } from 'react-router-dom'
 import { REALTY_ROUTE } from '../../utils/consts'
 import { CardRealtySmall } from '../Cards/CardRealtySmall'
 
-export function RealtyComponent({data: realties}) {
+export function RealtyComponent({ data: realties }) {
+
+  const reversedRealty = realties.slice().reverse()
+  const latestRealty = reversedRealty.slice(0, 4)
+
   return (
     <section className="">
       <div className="container">
@@ -11,9 +15,9 @@ export function RealtyComponent({data: realties}) {
           <NavLink to={`${REALTY_ROUTE}/1`} style={{ textDecoration: 'none' }}>Все предложения</NavLink>
         </div>
         <p className='ps-5'>Оказываем весь спектр услуг по покупке и аренде жилья, офисных помещений
-          <span> ПОЛНОЕ СОПРОВОЖДЕНИЕ </span> при покупке и аренде недвижимости от поиска до подписания договора и получения ключей</p>
-        <div className='mt-3 pb-5 ps-5 d-flex'>
-          {realties.slice(0, 3).map(item => <CardRealtySmall key={item.id} {...item} />)}
+          <b> ПОЛНОЕ СОПРОВОЖДЕНИЕ </b> при покупке и аренде недвижимости от поиска до подписания договора и получения ключей</p>
+        <div className='mt-3 pb-5 ps-5 d-flex gap-5 justify-content-center'>
+          {latestRealty.slice(0, 4).map(item => <CardRealtySmall key={item.id} {...item} />)}
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@ export function Pages({ currentPage }) {
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <Pagination className='mt-4'>
+    <Pagination className='d-flex align-items-end justify-content-center'>
       {pages.map((page) => (
         <Pagination.Item
           key={page}

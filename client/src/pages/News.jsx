@@ -19,12 +19,15 @@ export function News() {
   }, [dispatch])
 
   return (
-    <div>
-      <h1>News</h1>
-      <div className='d-flex justify-content-between align-items-center flex-column'> {news.map(el => {
-        return <CardNews key={el.id} {...el} />
-      })} </div>
-      <Pages currentPage={parseInt(page || 1)} />
-    </div>
+    <section className="mt-5">
+      <div className='container'>
+        <h1>News</h1>
+        <div className='d-flex mt-4 mb-5'>
+          {news.map(el => {
+            return <CardNews key={el.id} {...el} />
+          })} </div>
+        <Pages currentPage={parseInt(page || 1)} />
+      </div>
+    </section>
   )
 }

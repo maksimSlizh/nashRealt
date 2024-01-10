@@ -1,5 +1,8 @@
 @import "bootstrap/scss/bootstrap";
 
+@import "./navbar/navbar.scss";
+@import "./icon-link/icon-link.scss";
+
 .hover-effect {
   text-decoration: none;
   &:hover {
