@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { Navbar } from './components/Navbar'
+import { NavbarComponent } from './components/Navbar'
 import { AppRouter } from './components/AppRouter'
 import { checkAuth } from './http/userApi'
 import { setIsAuth, setUser } from './redux/userSlice'
@@ -34,8 +34,12 @@ export function App() {
   }
   return (
     <BrowserRouter>
-      <Navbar />
-      <AppRouter />
+      <div className="App">
+        <NavbarComponent />
+        <div style={{ paddingTop: '70px' }}> {/* Пример значения, в зависимости от высоты вашего Navbar */}
+          <AppRouter />
+        </div>
+      </div>
     </BrowserRouter>
   )
 }

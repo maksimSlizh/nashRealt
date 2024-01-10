@@ -1,4 +1,4 @@
-import { ADMIN_ROUTE, PREW_ROUTE, NEWS_ROUTE, INSURENCES_ROUTE, REALTY_ROUTE, CONTACTS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
+import { ADMIN_ROUTE, PREW_ROUTE, NEWS_ROUTE, INSURANCES_ROUTE, REALTY_ROUTE, CONTACTS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
 import { Admin} from '../pages/Admin'
 import { Prew } from '../pages/Prew'
 import { News } from '../pages/News'
@@ -38,7 +38,7 @@ export const publicRoutes = [
     Component: NewsCard,
   },
   {
-    path: INSURENCES_ROUTE,
+    path: INSURANCES_ROUTE,
     Component: Insurances,
   },
   {

@@ -36,11 +36,11 @@ export function CardRealties({id, title, description, price, area, rooms, floor,
           <div className='d-flex justify-content-between'>
             <div>
               <p>{title}</p>
+              <p>Price: {price}</p>
+              <p>Area: {area}</p>
+              <p>Rooms: {rooms}</p>
+              <p>Floor: {floor}</p>
               <p>{description}</p>
-              <p>{price}</p>
-              <p>{area}</p>
-              <p>{rooms}</p>
-              <p>{floor}</p>
             </div>
             <div>
               <Image
@@ -65,11 +65,11 @@ export function CardRealties({id, title, description, price, area, rooms, floor,
         <div className='d-flex justify-content-between'>
           <div>
             <p>{title}</p>
+            <p>Price: {price}</p>
+            <p>Area: {area}</p>
+            <p>Rooms: {rooms}</p>
+            <p>Floor: {floor}</p>
             <p>{description}</p>
-            <p>{price}</p>
-            <p>{area}</p>
-            <p>{rooms}</p>
-            <p>{floor}</p>
           </div>
           <div className='d-flex align-self-center'>
             <p >No images available</p>

@@ -5,7 +5,7 @@ import { fetchNews } from '../redux/newsSlice'
 import prew from '../assets/img/prew.webp'
 import { CardNewsSmall } from '../components/Cards/CardNewsSmall'
 import Button from 'react-bootstrap/Button'
-import { INSURENCES_ROUTE, REALTY_ROUTE } from '../utils/consts'
+import { INSURANCES_ROUTE, REALTY_ROUTE } from '../utils/consts'
 
 export function Prew() {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ export function Prew() {
           <p>Вы купили автомобиль в Польше. Предыдущий владелец обязан вам предоставить действующий страховой полис и в 14-дневный срок, а лучше в день продажи, сообщить в свою страховую компанию о продаже автомобиля. У нового владельца есть два варианта – остаться на действующей страховке или заключить новую. В первом случае вам придет перерасчет. Для иностранцев сумма будет гораздо выше, чем для граждан Польши. Поэтому мы рекомендуем воспользоваться вторым вариантом и обратиться к нам, чтобы рассчитать новую страховку в той компании, где стоимость будет дешевле. После заключения нового договора ОС необходимо сообщить в предыдущую страховую компанию о расторжении договора, но это за вас сделают наши сотрудники.</p>
           <Button
             variant="primary"
-            onClick={() => navigate(INSURENCES_ROUTE)} >Read more</Button>
+            onClick={() => navigate(INSURANCES_ROUTE)} >Read more</Button>
         </section>
         <section className="mt-5 bg-body-secondary">
           <h3 className='pt-5 text-center'>Realty</h3>

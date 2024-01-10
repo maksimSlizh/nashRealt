@@ -5,8 +5,15 @@ const User = sequelize.define('user', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   email: {type: DataTypes.STRING, unique: true},
   password: {type: DataTypes.STRING},
+  // isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
+  // activationLink: {type: DataTypes.STRING},
   role: {type: DataTypes.STRING, defaultValue: 'USER'},
 })
+
+// const Token = sequelize.define('token', {
+//   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+//   refreshToken: {type: DataTypes.STRING, unique: true},
+// })
 
 const News = sequelize.define('news', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -31,7 +38,6 @@ const RealtyImage = sequelize.define('realty_image', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   imageUrl: {type: DataTypes.STRING, allowNull: false}, // Путь к изображению
 })
-console.log(RealtyImage)
 
 
 Realty.hasMany(RealtyImage);
@@ -40,6 +46,8 @@ User.hasMany(Realty)
 Realty.belongsTo(User)
 User.hasMany(News)
 News.belongsTo(User)
+// Token.belongsTo(User);
+// User.hasMany(Token);
 
 module.exports = {
   User,
