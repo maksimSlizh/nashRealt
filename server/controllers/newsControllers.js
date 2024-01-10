@@ -19,13 +19,24 @@ class NewsController {
   }
 
   async getAll(req, res) {
-    let { limit, page } = req.query
-    page = page || 1
-    limit = limit || 9
-    let offset = page * limit - limit
-    const newsAll = await News.findAndCountAll({ limit, offset })
-    return res.json(newsAll)
-  }
+    let { limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 9;
+    const offset = (page - 1) * limit;
+
+    try {
+        const newsAll = await News.findAndCountAll({
+            limit,
+            offset,
+            order: [['createdAt', 'DESC']] // Сортировка по дате создания в обратном порядке
+        });
+
+        return res.json(newsAll);
+    } catch (error) {
+        // Обработка ошибок
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
   async getOne(req, res) {
     const { id } = req.params

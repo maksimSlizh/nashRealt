@@ -1,0 +1,10 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  grid-auto-rows: minmax(auto, max-content); // Adjust the height of each grid item based on its content
+
+  > * {
+    break-inside: avoid; // Prevent grid items from breaking across columns
+  }
+}

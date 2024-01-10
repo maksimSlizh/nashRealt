@@ -17,7 +17,7 @@ const initialState = {
   oneNews: {},
   page: 1,
   totalCount: 0,
-  limit: 9,
+  limit: 8,
   loading: false,
   error: null,
 }
