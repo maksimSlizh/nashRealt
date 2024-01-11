@@ -21,7 +21,7 @@ export function News() {
   return (
     <section className="mt-5">
       <div className='container'>
-        <h1>News</h1>
+        <h1>Новости</h1>
         <div className='mt-4 mb-5 card-grid'>
           {news.map(el => {
             return <CardNews key={el.id} {...el} />
