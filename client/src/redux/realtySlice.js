@@ -34,8 +34,8 @@ export const realtySlice = createSlice({
       })
       .addCase(fetchRealties.fulfilled, (state, action) => {
         state.loading = false;
-        state.realties = action.payload;
-        state.totalCount = action.payload.count;
+        state.realties = action.payload.realties;
+        state.totalCount = action.payload.totalCount;
       })
       .addCase(fetchRealties.rejected, (state, action) => {
         state.loading = false;

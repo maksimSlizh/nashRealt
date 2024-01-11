@@ -6,8 +6,8 @@ export const createRealty = async (realtyData) => {
 };
 
 export const requestRealties = async (page, limit) => {
-  const { data } = await $host.get('api/realty', { params: { page, limit } });
-  return data;
+  const {data} = await $host.get('api/realty', { params: { page, limit } });
+  return data
 };
 
 export const requestOneRealty = async (id) => {

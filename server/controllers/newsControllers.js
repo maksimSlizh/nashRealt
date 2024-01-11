@@ -21,7 +21,7 @@ class NewsController {
   async getAll(req, res) {
     let { limit, page } = req.query;
     page = page || 1;
-    limit = limit || 9;
+    limit = limit || 8;
     const offset = (page - 1) * limit;
 
     try {

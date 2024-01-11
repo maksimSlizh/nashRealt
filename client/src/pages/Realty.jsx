@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 
 export function Realty() {
 
-  const { realties } = useSelector(state => state.realty)
+  const { realties, totalCount, limit } = useSelector(state => state.realty)
   const { page } = useParams()
   const dispatch = useDispatch()
 
@@ -24,7 +24,7 @@ export function Realty() {
       <div className='d-flex flex-column'> {realties.map(el => {
         return <CardRealties key={el.id} {...el} />
       })} </div>
-      <Pages currentPage={parseInt(page || 1)} />
+      <Pages currentPage={parseInt(page || 1)} totalCount={totalCount} limit={limit} resource={'realty'} />
     </div>
   )
 }

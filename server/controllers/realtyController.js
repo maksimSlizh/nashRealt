@@ -32,9 +32,18 @@ class RealtyController {
   }
 
   async getAll(req, res, next) {
+    let { limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 4;
+    const offset = (page - 1) * limit;
     try {
-      const realties = await Realty.findAll({ include: [RealtyImage] });
-      return res.json(realties);
+      const totalCount = await Realty.count()
+      const realties = await Realty.findAll({
+        limit,
+        offset,
+        include: [RealtyImage]
+      });
+      return res.json({totalCount, realties});
     } catch (e) {
       next(ApiError.internalServerError(e.message));
     }

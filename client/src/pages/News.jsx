@@ -6,7 +6,7 @@ import { Pages } from '../components/Pages'
 import { useParams } from 'react-router-dom'
 
 export function News() {
-  const { news } = useSelector(state => state.news)
+  const { news, totalCount, limit } = useSelector(state => state.news)
   const { page } = useParams()
   const dispatch = useDispatch()
 
@@ -26,7 +26,7 @@ export function News() {
           {news.map(el => {
             return <CardNews key={el.id} {...el} />
           })} </div>
-        <Pages currentPage={parseInt(page || 1)} />
+        <Pages currentPage={parseInt(page || 1)} totalCount={totalCount} limit={limit} resource={'news'} />
       </div>
     </section>
   )

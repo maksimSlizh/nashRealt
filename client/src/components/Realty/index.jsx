@@ -4,9 +4,6 @@ import { CardRealtySmall } from '../Cards/CardRealtySmall'
 
 export function RealtyComponent({ data: realties }) {
 
-  const reversedRealty = realties.slice().reverse()
-  const latestRealty = reversedRealty.slice(0, 4)
-
   return (
     <section className="">
       <div className="container">
@@ -17,7 +14,7 @@ export function RealtyComponent({ data: realties }) {
         <p className='ps-5'>Оказываем весь спектр услуг по покупке и аренде жилья, офисных помещений
           <b> ПОЛНОЕ СОПРОВОЖДЕНИЕ </b> при покупке и аренде недвижимости от поиска до подписания договора и получения ключей</p>
         <div className='mt-3 pb-5 ps-5 d-flex gap-5 justify-content-center'>
-          {latestRealty.slice(0, 4).map(item => <CardRealtySmall key={item.id} {...item} />)}
+          {realties.slice(0, 4).map(item => <CardRealtySmall key={item.id} {...item} />)}
         </div>
       </div>
     </section>
