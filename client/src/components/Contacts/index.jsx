@@ -9,8 +9,8 @@ import { CONTACTS_ROUTE } from '../../utils/consts';
 export function ContactsComponent() {
   const navigate = useNavigate();
   return (
-    <section className="bg-dark">
-      <div className="container">
+    <section className="bg-dark ">
+      <div className="container d-flex flex-column align-items-center justify-content-center">
         <div className='d-flex align-items-center pt-4 ps-5 pb-5'>
           <h3 className='text-white'>Свяжись с нами</h3>
         </div>

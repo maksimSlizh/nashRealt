@@ -47,7 +47,7 @@ export function Realty() {
           </div>
           <img src={agensy} style={{ width: '50%' }} alt="" />
         </div>
-        <h4 className='mt-5'>Предложение</h4>
+        <h4 className='mt-5'>Предложения</h4>
         <hr />
         <div className='d-flex flex-column'> {realties.map(el => {
           return <CardRealties key={el.id} {...el} />

@@ -5,6 +5,7 @@ import { News } from '../pages/News'
 import { NewsCard } from '../pages/NewsCard'
 import { Insurances } from '../pages/Insurances'
 import { Realty } from '../pages/Realty'
+import {RealtyCard} from '../pages/RealtyCard'
 import { Contacts } from '../pages/Contacts'
 import { Auth } from '../pages/Auth'
 
@@ -44,6 +45,10 @@ export const publicRoutes = [
   {
     path: REALTY_ROUTE  + '/:page',
     Component: Realty,
+  },
+  {
+    path: REALTY_ROUTE + '/selected' + '/:id',
+    Component: RealtyCard,
   },
   {
     path: CONTACTS_ROUTE,
