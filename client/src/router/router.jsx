@@ -4,6 +4,7 @@ import { Prew } from '../pages/Prew'
 import { News } from '../pages/News'
 import { NewsCard } from '../pages/NewsCard'
 import { Insurances } from '../pages/Insurances'
+import { InsuranceCard } from '../pages/InsuranceCard'
 import { Realty } from '../pages/Realty'
 import {RealtyCard} from '../pages/RealtyCard'
 import { Contacts } from '../pages/Contacts'
@@ -41,6 +42,10 @@ export const publicRoutes = [
   {
     path: INSURANCES_ROUTE,
     Component: Insurances,
+  },
+  {
+    path: INSURANCES_ROUTE + '/selected' + '/:id',
+    Component: InsuranceCard,
   },
   {
     path: REALTY_ROUTE  + '/:page',

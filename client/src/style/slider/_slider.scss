@@ -1,0 +1,38 @@
+.slider {
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    border: 1px solid #282554;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transition: 0.3s ease;
+
+    &:hover {
+
+      // Выбираем иконку внутри .slider__button при hover
+      .slider__icon {
+        transform: scale(1.2);
+      }
+    }
+
+    &:active {
+      background-color: #524d99;
+    }
+  }
+
+  &__container {
+    width: 500px;
+  }
+
+}

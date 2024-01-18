@@ -9,7 +9,9 @@ export function CardRealtySmall({ realty_images, title, price, id }) {
     if (realty_images && realty_images.length > 0) {
       const firstImage = realty_images[0];
       return (
-        <NavLink to={`${REALTY_ROUTE}/selected/${id}`} style={{ textDecoration: 'none' }} >
+        <NavLink
+        to={`${REALTY_ROUTE}/selected/${id}`}
+        className="card-link" >
           <Card className="mt-5" style={{ width: '18rem', height: '18rem' }}>
             <Card.Img
               variant="top"

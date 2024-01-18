@@ -1,37 +1,81 @@
-import { NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
-import { INSURANCES_ROUTE } from '../../utils/consts'
-import insurance from '../../assets/img/Insurance.jpg'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { CardInsuranceSmall } from '../Cards/CardInsuranceSmall';
+import { INSURANCES_ROUTE } from '../../utils/consts';
+import Carousel from 'react-bootstrap/Carousel';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export function InsuranceComponent() {
-  const navigate = useNavigate()
+export function InsuranceComponent({ data: insurance }) {
+  const cardsPerSlide = 3;
+
+  // Разбиваем массив карточек на группы по 3
+  const groupedInsurance = [];
+  for (let i = 0; i < insurance.length; i += cardsPerSlide) {
+    groupedInsurance.push(insurance.slice(i, i + cardsPerSlide));
+  }
+
+  const handlePrev = () => {
+    if (carouselRef.current) {
+      carouselRef.current.prev();
+    }
+  };
+
+  const handleNext = () => {
+    if (carouselRef.current) {
+      carouselRef.current.next();
+    }
+  };
+
+  const carouselRef = React.createRef();
+
   return (
     <section className="bg-light pb-5">
-      <div className='container'>
-        <div className='d-flex align-items-center pt-4 ps-5 pb-4'>
-          <h3 className='text-center pe-5'>Страхование</h3>
-          <NavLink to={INSURANCES_ROUTE} style={{ textDecoration: 'none' }}>Читать все</NavLink>
+      <div className="container">
+        <div className="d-flex align-items-center pt-4 ps-5 pb-4">
+          <h3 className="text-center pe-5">Страхование</h3>
+          <NavLink to={INSURANCES_ROUTE} style={{ textDecoration: 'none' }}>
+            Читать все
+          </NavLink>
         </div>
-        <div className='pt-4 pb-5 ps-5 bg-white d-flex justify-content-between'>
-          <div className='d-flex flex-column align-items-center'>
-            <ul className='mt-auto'>
-              <li>Страхование от несчастных случаев</li>
-              <li>Для карт Побыта, Путешествия</li>
-              <li>Страхование бизнеса, учебы</li>
-              <li>Страхование недвижимости</li>
-              <li>ОС Zawodowa, парикмахер, врач, студент и тд. </li>
-              <li>Страхование жизни и здоровья LuxMed</li>
-              <li>Автострахование - ОС Graniczne на бел и укр. номерах, ОС, АС, TAXI на польских номерах </li>
-            </ul>
-            <Button
-            className="mt-auto"
-            variant="outline-info"
-            onClick={() => navigate(INSURANCES_ROUTE)}>Узнать больше</Button>
+
+        <div className="mt-4 pb-5 d-flex bg-white">
+          <div className='ms-5 d-flex align-items-center pe-4'>
+            <button
+              className='slider__button'
+              onClick={handlePrev}>
+              <IoIosArrowBack
+                className='slider__icon'
+              />
+            </button>
           </div>
-          <img src={insurance} alt="" style={{ width: '50%'}} height={'40%'} />
+          <div className='d-flex align-items-center pe-5'>
+            <button
+              className='slider__button'
+              onClick={handleNext}
+            >
+              <IoIosArrowForward className='slider__icon' />
+            </button>
+          </div>
+          <div className='d-flex pt-5'>
+            <Carousel
+              interval={null}
+              indicators={false}
+              className='ps-2 pe-2'
+              controls={false}
+              ref={carouselRef}>
+              {groupedInsurance.map((group, index) => (
+                <Carousel.Item key={index}>
+                  <div className="d-flex gap-5 slider__countainer">
+                    {group.map((item) => (
+                      <CardInsuranceSmall key={item.id} {...item} />
+                    ))}
+                  </div>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

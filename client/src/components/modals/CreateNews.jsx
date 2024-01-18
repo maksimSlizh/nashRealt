@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Button, Modal, Form, Image } from 'react-bootstrap'
 import { createNews } from '../../http/newsApi'
+import {getUserIdFromToken} from "../../helpers/index";
 
 export function CreateNews({ show, onHide }) {
-  const { news } = useSelector(state => state.news)
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [description, setDescription] = useState('')
@@ -27,11 +26,14 @@ export function CreateNews({ show, onHide }) {
   }
   const submitNews = (e) => {
     e.preventDefault()
+
+    const userId = getUserIdFromToken()
     const formData = new FormData()
     formData.append('title', title)
     formData.append('text', text)
     formData.append('description', description)
     formData.append('img', image)
+    formData.append('userId', userId)
 
 
     createNews(formData).then(data => {

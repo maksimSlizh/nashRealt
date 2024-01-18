@@ -4,8 +4,10 @@ import { NEWS_ROUTE } from '../../utils/consts'
 
 export function CardNewsSmall(props) {
   return (
-    <NavLink to={`${NEWS_ROUTE}/selected/${props.id}`} style={{ textDecoration: 'none' }} >
-      <Card className="mt-5" style={{ width: '18rem', height: '18rem' }}>
+    <NavLink
+    to={`${NEWS_ROUTE}/selected/${props.id}`}
+    className="card-link" >
+      <Card  style={{ width: '18rem', height: '18rem' }}>
         <Card.Img
           variant="top"
           src={import.meta.env.VITE_REACT_APP_API_URL + props.img} style={{ height: '10rem', objectFit: 'cover' }} />

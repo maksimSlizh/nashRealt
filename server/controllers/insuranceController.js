@@ -1,18 +1,20 @@
-const { News } = require('../models/models')
+const { Insurance } = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const fs = require('fs')
 const path = require('path')
 
-class NewsController {
+class InsuranceController {
   async create(req, res, next) {
     try {
       const { title, text, description, userId } = req.body
-      const { img } = req.files
+      const { img, icon } = req.files
       const fileName = uuid.v4() + '.jpg'
+      const iconFileName = uuid.v4() + '_icon.png'
       img.mv(path.resolve(__dirname, '..', 'static', fileName))
-      const news = await News.create({ title, text, description, img: fileName, userId })
-      return res.json(news)
+      icon.mv(path.resolve(__dirname, '..', 'static', iconFileName))
+      const insurance = await Insurance.create({ title, text, description, img: fileName, icon: iconFileName, userId})
+      return res.json(insurance)
     } catch (e) {
       next(ApiError.badRequest(e.message))
     }
@@ -25,13 +27,13 @@ class NewsController {
     const offset = (page - 1) * limit;
 
     try {
-        const newsAll = await News.findAndCountAll({
+        const insuranceAll = await Insurance.findAndCountAll({
             limit,
             offset,
             order: [['createdAt', 'DESC']] // Сортировка по дате создания в обратном порядке
         });
 
-        return res.json(newsAll);
+        return res.json(insuranceAll);
     } catch (error) {
         // Обработка ошибок
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -40,33 +42,37 @@ class NewsController {
 
   async getOne(req, res) {
     const { id } = req.params
-    const news = await News.findOne({ where: { id } })
-    return res.json(news)
+    const insurance = await Insurance.findOne({ where: { id } })
+    return res.json(insurance)
   }
 
   async deleteOne(req, res, next) {
     try {
       const { id } = req.params;
-      const news = await News.findOne({ where: { id } });
+      const insurance = await Insurance.findOne({ where: { id } });
 
-      if (!news) {
-        return next(ApiError.badRequest('Пост не найден'));
+      if (!insurance) {
+        return next(ApiError.badRequest('Insurance не найден'));
       }
 
       // Удаляем изображение из директории static
-      const filePath = path.resolve(__dirname, '..', 'static', news.img);
+      const filePath = path.resolve(__dirname, '..', 'static', insurance.img);
+      const iconFilePath = path.resolve(__dirname, '..', 'static', insurance.icon);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
       }
+      if (fs.existsSync(iconFilePath)) {
+        fs.unlinkSync(iconFilePath);
+      }
 
       // Удаляем запись из базы данных
-      await news.destroy();
+      await insurance.destroy();
 
-      return res.json({ message: 'Пост успешно удален' });
+      return res.json({ message: 'Insurance успешно удален' });
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
   }
 }
 
-module.exports = new NewsController()
+module.exports = new InsuranceController()

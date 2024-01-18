@@ -18,9 +18,10 @@ const User = sequelize.define('user', {
 const News = sequelize.define('news', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   title: {type: DataTypes.STRING, unique: true, allowNull: false},
-  text: {type: DataTypes.STRING, allowNull: false},
+  text: {type: DataTypes.STRING(5000), allowNull: false},
   img: {type: DataTypes.STRING, allowNull: false},
   description: {type: DataTypes.STRING, allowNull: false},
+  userId: { type: DataTypes.INTEGER, allowNull: false }
 })
 
 const Realty = sequelize.define('realty', {
@@ -39,13 +40,25 @@ const RealtyImage = sequelize.define('realty_image', {
   imageUrl: {type: DataTypes.STRING, allowNull: false}, // Путь к изображению
 })
 
+const Insurance = sequelize.define('insurance', {
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  title: {type: DataTypes.STRING, unique: true, allowNull: false},
+  text: {type: DataTypes.STRING(2500), allowNull: false},
+  img: {type: DataTypes.STRING, allowNull: false},
+  icon: {type: DataTypes.STRING},
+  description: {type: DataTypes.STRING, allowNull: false},
+  userId: { type: DataTypes.INTEGER, allowNull: false }
+})
+
 
 Realty.hasMany(RealtyImage);
 RealtyImage.belongsTo(Realty);
 User.hasMany(Realty)
 Realty.belongsTo(User)
-User.hasMany(News)
-News.belongsTo(User)
+News.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(News, { foreignKey: 'userId' });
+Insurance.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Insurance, { foreignKey: 'userId' });
 // Token.belongsTo(User);
 // User.hasMany(Token);
 
@@ -53,5 +66,6 @@ module.exports = {
   User,
   News,
   Realty,
-  RealtyImage
+  RealtyImage,
+  Insurance
 }

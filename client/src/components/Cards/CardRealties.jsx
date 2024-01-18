@@ -35,7 +35,10 @@ export function CardRealties({ id, title, description, price, area, rooms, floor
       return (
 
         <div className='card d-flex flex-column mt-5'>
-          <NavLink to={`${REALTY_ROUTE}/selected/${id}`} style={{ textDecoration: 'none', color: 'black' }} >
+          <NavLink
+          to={`${REALTY_ROUTE}/selected/${id}`}
+          style={{ color: 'black' }}
+          className="card-link" >
             <div className='d-flex'>
 
               <div>

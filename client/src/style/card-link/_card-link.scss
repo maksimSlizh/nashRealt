@@ -1,0 +1,28 @@
+.card-link {
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s, color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.card-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // background-color: rgba(255, 255, 255, 0); /* Изначально нулевая прозрачность */
+  transition:  background-color 0.7s ease; /* Добавлено свойство transition */
+  border-radius: 5px; /* Радиус скругления углов */
+  z-index: 1;
+}
+
+.card-link:hover::before {
+  background-color: rgba(108, 187, 248, 0.297); /* Появление фона с полупрозрачностью и цветом $yellow-400 */
+}
+
+.card-link:hover {
+  transform: translateY(-10px);
+  color: rgba(255, 255, 0, 0.311); /* Цвет текста при наведении */
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
+}

@@ -7,6 +7,7 @@ import { checkAuth } from './http/userApi'
 import { setIsAuth, setUser } from './redux/userSlice'
 import { Spinner } from 'react-bootstrap'
 import { fetchNews } from './redux/newsSlice'
+import { fetchInsurance } from './redux/insuranceSlice'
 
 export function App() {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export function App() {
 
   useEffect(() => {
     dispatch(fetchNews({ page: 1 }))
+    dispatch(fetchInsurance({ page: 1 }))
     const fetchUser = async () => {
       try {
         const { data } = await checkAuth()

@@ -1,0 +1,30 @@
+.insurance {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+  grid-auto-rows: minmax(auto, max-content); // Adjust the height of each grid item based on its content
+
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    height: 300px;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
+    background-color: $gray-100;
+    transition: transform 0.3s, background-color 0.3s;
+
+    &:hover {
+      transform: translateY(-10px);
+      background-color: $yellow-400;
+    }
+  }
+
+  &__text {
+    padding: 10px 0 0 10px;
+    font-size: 25px;
+    line-height: 1.2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}

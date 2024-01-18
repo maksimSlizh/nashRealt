@@ -5,13 +5,13 @@ import { NEWS_ROUTE } from '../../utils/consts'
 export function NewsComponent({ data: news }) {
 
   return (
-    <section className="mt-5 pb-5 bg-light">
+    <section className="pt-5 pb-5 bg-light">
       <div className='container'>
         <div className='d-flex align-items-center pt-4 ps-5'>
           <h3 className='pe-5'>Новости</h3>
           <NavLink to={`${NEWS_ROUTE}/1`} style={{ textDecoration: 'none' }}>Все новости</NavLink>
         </div>
-        <div className='mt-4 pb-5 ps-5 d-flex bg-white gap-5 justify-content-center'>
+        <div className='pt-5 pb-5  d-flex bg-white gap-4 justify-content-center'>
           {news.slice(0, 4).map(item => <CardNewsSmall key={item.id} {...item} />)}
         </div>
       </div>
