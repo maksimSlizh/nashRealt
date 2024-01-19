@@ -27,20 +27,21 @@ export function CardNews(props) {
   }
 
   return (
-    <div className="card" style={{ width: '18rem' }}>
-      <img src={import.meta.env.VITE_REACT_APP_API_URL + props.img} className="card-img-top" alt="..." style={{ height: '10rem', objectFit: 'cover' }} />
-      <div className="card-body d-flex flex-column justify-content-between">
-        <h5 className="card-title">{props.title}</h5>
-        <p className="card-text">{props.description}</p>
-        <div className='mt-auto d-flex'>
-          <NavLink to={NEWS_ROUTE + '/selected' + '/' + props.id} className="btn btn-primary">Узнать больше</NavLink>
-          {isAuth && userRole === 'ADMIN' && ( // Проверка на аутентификацию и роль "admin"
-            <button className="btn btn-danger" onClick={() => handleDelete(props.id)}>
-              Delete
-            </button>
-          )}
+    <NavLink to={NEWS_ROUTE + '/selected' + '/' + props.id} className="card-link">
+      <div className="card" style={{ width: '100%' }}>
+        <img src={import.meta.env.VITE_REACT_APP_API_URL + props.img} className="card-img-top" alt="..." style={{ height: '10rem', objectFit: 'cover' }} />
+        <div className="card-body d-flex flex-column justify-content-between">
+          <h5 className="card-title">{props.title}</h5>
+          <p className="card-text">{props.description}</p>
+          <div className='mt-auto d-flex'>
+            {isAuth && userRole === 'ADMIN' && ( // Проверка на аутентификацию и роль "admin"
+              <button className="btn btn-danger card-link__delete" onClick={() => handleDelete(props.id)}>
+                Delete
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </NavLink>
   )
 }

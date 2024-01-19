@@ -19,14 +19,21 @@ export function News() {
   }, [dispatch])
 
   return (
-    <section className="mt-5">
-      <div className='container'>
-        <h1>Новости</h1>
-        <div className='mt-4 mb-5 card-grid'>
-          {news.map(el => {
-            return <CardNews key={el.id} {...el} />
-          })} </div>
-        <Pages currentPage={parseInt(page || 1)} totalCount={totalCount} limit={limit} resource={'news'} />
+    <section className="" >
+      <div
+      className='container mt-5 d-flex flex-column justify-content-between'
+      style={{ minHeight: 'calc(100vh - 118px)' }}>
+        <div>
+          <h1>Новости</h1>
+          <div className='mt-4 mb-5 card-grid'>
+            {news.map(el => {
+              return <CardNews key={el.id} {...el} />
+            })}
+          </div>
+        </div>
+        <div className='mb-3'>
+          <Pages currentPage={parseInt(page || 1)} totalCount={totalCount} limit={limit} resource={'news'} />
+        </div>
       </div>
     </section>
   )

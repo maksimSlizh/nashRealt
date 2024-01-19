@@ -27,7 +27,9 @@ const News = sequelize.define('news', {
 const Realty = sequelize.define('realty', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   title: {type: DataTypes.STRING, unique: true, allowNull: false},
-  description: {type: DataTypes.STRING, allowNull: false},
+  description: {type: DataTypes.STRING(2500), allowNull: false},
+  address: {type: DataTypes.STRING, allowNull: false},
+  deposit: {type: DataTypes.STRING},
   price: {type: DataTypes.STRING, allowNull: false},
   area: {type: DataTypes.STRING, allowNull: false},
   rooms: {type: DataTypes.STRING, allowNull: false},

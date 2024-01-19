@@ -23,6 +23,10 @@
 
 .card-link:hover {
   transform: translateY(-10px);
-  color: rgba(255, 255, 0, 0.311); /* Цвет текста при наведении */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
+}
+
+.card-link__delete {
+  position: relative;
+  z-index: 2;
 }

@@ -3,7 +3,6 @@ import { requestInsurance, requestOneInsurance } from '../http/insuranceApi'
 
 export const fetchInsurance = createAsyncThunk('news/fetchInsurance', async ({page = 1}, {getState}) => {
   const { limit } = getState().news
-  console.log(page, limit)
   const data = await requestInsurance(page, limit)
 
   return data
@@ -49,7 +48,7 @@ export const insuranceSlice = createSlice({
       })
       .addCase(fetchOneInsurance.fulfilled, (state, action) => {
         state.loading = false
-        state.oneNews = action.payload
+        state.oneInsurance = action.payload
       })
       .addCase(fetchOneInsurance.rejected, (state, action) => {
         state.loading = false

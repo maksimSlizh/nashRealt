@@ -56,7 +56,7 @@ export function InsuranceComponent({ data: insurance }) {
               <IoIosArrowForward className='slider__icon' />
             </button>
           </div>
-          <div className='d-flex pt-5'>
+          <div className='d-flex'>
             <Carousel
               interval={null}
               indicators={false}
@@ -64,7 +64,7 @@ export function InsuranceComponent({ data: insurance }) {
               controls={false}
               ref={carouselRef}>
               {groupedInsurance.map((group, index) => (
-                <Carousel.Item key={index}>
+                <Carousel.Item key={index} className='mt-5'>
                   <div className="d-flex gap-5 slider__countainer">
                     {group.map((item) => (
                       <CardInsuranceSmall key={item.id} {...item} />

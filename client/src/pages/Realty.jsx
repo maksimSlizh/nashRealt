@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { CardRealties } from '../components/Cards/CardRealties'
+import { CardRealty } from '../components/Cards/CardRealty'
 import { fetchRealties } from '../redux/realtySlice'
 import { Pages } from '../components/Pages'
 import { useParams } from 'react-router-dom'
@@ -22,10 +22,10 @@ export function Realty() {
   return (
     <section className="mt-5">
       <div className='container'>
-        <h3>Агентство недвижимости NashRealt в Труймясте</h3>
+        <h3 className='pb-5'>Агентство недвижимости NashRealt в Труймясте</h3>
 
         <div className='d-flex'>
-          <div>
+          <div className=''>
             <p>Оказываем весь спектр услуг по покупке и аренде жилья, офисных помещений
               <b> ПОЛНОЕ СОПРОВОЖДЕНИЕ</b> при покупке и аренде недвижимости от поиска до подписания договора и получения ключей:</p>
             <ul>
@@ -49,9 +49,11 @@ export function Realty() {
         </div>
         <h4 className='mt-5'>Предложения</h4>
         <hr />
-        <div className='d-flex flex-column'> {realties.map(el => {
-          return <CardRealties key={el.id} {...el} />
-        })} </div>
+        <div className='mt-4 mb-5 card-grid'>
+        {realties.map(el => {
+          return <CardRealty key={el.id} {...el} />
+        })}
+        </div>
         <Pages currentPage={parseInt(page || 1)} totalCount={totalCount} limit={limit} resource={'realty'} />
       </div>
     </section>

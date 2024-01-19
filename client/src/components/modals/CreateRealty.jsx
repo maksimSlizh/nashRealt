@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Button, Modal, Form, Image } from 'react-bootstrap';
 import { createRealty } from '../../http/realtyApi';
 
 export function CreateRealty({ show, onHide }) {
-  const { realty } = useSelector((state) => state.realty);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -13,6 +11,8 @@ export function CreateRealty({ show, onHide }) {
   const [floor, setFloor] = useState('');
   const [images, setImages] = useState([]);
   const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
+  const [address, setAddress] = useState('');
+  const [deposit, setDeposit] = useState('');
 
   const changeTitle = (e) => setTitle(e.target.value);
   const changeDescription = (e) => setDescription(e.target.value);
@@ -20,6 +20,8 @@ export function CreateRealty({ show, onHide }) {
   const changeArea = (e) => setArea(e.target.value);
   const changeRooms = (e) => setRooms(e.target.value);
   const changeFloor = (e) => setFloor(e.target.value);
+  const changeAddress = (e) => setAddress(e.target.value);
+  const changeDeposit = (e) => setDeposit(e.target.value);
 
   const changeImages = (e) => {
     const files = Array.from(e.target.files);
@@ -45,6 +47,8 @@ export function CreateRealty({ show, onHide }) {
     formData.append('area', area);
     formData.append('rooms', rooms);
     formData.append('floor', floor);
+    formData.append('address', address);
+    formData.append('deposit', deposit);
 
     // Добавление изображений в formData
     images.forEach((image) => {
@@ -62,6 +66,8 @@ export function CreateRealty({ show, onHide }) {
       setArea('');
       setRooms('');
       setFloor('');
+      setAddress('');
+      setDeposit('');
       setImages([]);
       setImagePreviewUrls([]);
       onHide();
@@ -78,11 +84,18 @@ export function CreateRealty({ show, onHide }) {
       <Modal.Body>
         <Form>
           <Form.Control value={title} onChange={changeTitle} placeholder="Enter title" />
-          <Form.Control value={description} onChange={changeDescription} placeholder="Enter description" />
+          <Form.Control
+          value={description}
+          as="textarea"
+          style={{ height: '135px' }}
+          onChange={changeDescription}
+          placeholder="Enter description" />
           <Form.Control value={price} onChange={changePrice} placeholder="Enter price" />
           <Form.Control value={area} onChange={changeArea} placeholder="Enter area" />
           <Form.Control value={rooms} onChange={changeRooms} placeholder="Enter rooms" />
           <Form.Control value={floor} onChange={changeFloor} placeholder="Enter floor" />
+          <Form.Control value={address} onChange={changeAddress} placeholder="Enter address" />
+          <Form.Control value={deposit} onChange={changeDeposit} placeholder="Enter deposit" />
           <Form.Control type="file" multiple onChange={changeImages} />
           {imagePreviewUrls.map((url, index) => (
             <Image key={index} src={url} width={300} height={200} />
