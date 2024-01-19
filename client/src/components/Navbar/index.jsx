@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { setIsAuth, setUser } from '../../redux/userSlice';
 import logo from '../../assets/img/logo.jpg';
@@ -22,6 +22,7 @@ export function NavbarComponent() {
   const { isAuth } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const token = localStorage.getItem('token');
   let userRole = '';
@@ -48,6 +49,10 @@ export function NavbarComponent() {
       document.removeEventListener('click', handleOutsideClick);
     };
   }, [showOffcanvas]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Прокрутка вверх при изменении маршрута
+  }, [location.pathname]);
 
   function logOut() {
     localStorage.removeItem('token');

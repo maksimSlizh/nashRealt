@@ -39,7 +39,7 @@ export function Insurances() {
           </div>
         </div>
       </section>
-      <section className='mt-5'>
+      <section className='mt-5 pb-5'>
         <div className='container'>
           <h2 className='mb-5'>Мы предлагаем</h2>
           <div className='insurance'>
