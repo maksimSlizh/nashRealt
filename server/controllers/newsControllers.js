@@ -7,41 +7,59 @@ const path = require('path')
 class NewsController {
   async create(req, res, next) {
     try {
-      const { title, text, description, userId } = req.body
-      const { img } = req.files
-      const fileName = uuid.v4() + '.jpg'
-      img.mv(path.resolve(__dirname, '..', 'static', fileName))
-      const news = await News.create({ title, text, description, img: fileName, userId })
-      return res.json(news)
+      const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId } = req.body;
+      const { img } = req.files;
+      const fileName = uuid.v4() + '.jpg';
+      img.mv(path.resolve(__dirname, '..', 'static', fileName));
+
+      const news = await News.create({
+        title_ru,
+        title_pl,
+        text_ru,
+        text_pl,
+        description_ru,
+        description_pl,
+        img: fileName,
+        userId,
+      });
+
+      return res.json(news);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
 
   async getAll(req, res) {
-    let { limit, page } = req.query;
-    page = page || 1;
-    limit = limit || 8;
-    const offset = (page - 1) * limit;
-
     try {
-        const newsAll = await News.findAndCountAll({
-            limit,
-            offset,
-            order: [['createdAt', 'DESC']] // Сортировка по дате создания в обратном порядке
-        });
+      const { limit, page } = req.query;
+      const offset = (page - 1) * limit;
 
-        return res.json(newsAll);
+      const newsAll = await News.findAndCountAll({
+        limit,
+        offset,
+        order: [['createdAt', 'DESC']],
+      });
+
+      return res.json(newsAll);
     } catch (error) {
-        // Обработка ошибок
-        return res.status(500).json({ error: 'Internal Server Error' });
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+  }
 
   async getOne(req, res) {
-    const { id } = req.params
-    const news = await News.findOne({ where: { id } })
-    return res.json(news)
+    const { id } = req.params;
+
+    try {
+      const news = await News.findOne({ where: { id } });
+
+      if (!news) {
+        return res.status(404).json({ error: 'News not found' });
+      }
+
+      return res.json(news)
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 
   async deleteOne(req, res, next) {

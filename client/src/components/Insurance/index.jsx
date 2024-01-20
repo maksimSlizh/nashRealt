@@ -1,40 +1,42 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { CardInsuranceSmall } from '../Cards/CardInsuranceSmall';
-import { INSURANCES_ROUTE } from '../../utils/consts';
-import Carousel from 'react-bootstrap/Carousel';
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { CardInsuranceSmall } from '../Cards/CardInsuranceSmall'
+import { INSURANCES_ROUTE } from '../../utils/consts'
+import Carousel from 'react-bootstrap/Carousel'
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 export function InsuranceComponent({ data: insurance }) {
-  const cardsPerSlide = 3;
+  const cardsPerSlide = 3
+  const { t } = useTranslation()
 
   // Разбиваем массив карточек на группы по 3
   const groupedInsurance = [];
   for (let i = 0; i < insurance.length; i += cardsPerSlide) {
-    groupedInsurance.push(insurance.slice(i, i + cardsPerSlide));
+    groupedInsurance.push(insurance.slice(i, i + cardsPerSlide))
   }
 
   const handlePrev = () => {
     if (carouselRef.current) {
-      carouselRef.current.prev();
+      carouselRef.current.prev()
     }
-  };
+  }
 
   const handleNext = () => {
     if (carouselRef.current) {
-      carouselRef.current.next();
+      carouselRef.current.next()
     }
-  };
+  }
 
-  const carouselRef = React.createRef();
+  const carouselRef = React.createRef()
 
   return (
     <section className="bg-light pb-5">
       <div className="container">
         <div className="d-flex align-items-center pt-4 ps-5 pb-4">
-          <h3 className="text-center pe-5">Страхование</h3>
+          <h3 className="text-center pe-5">{t('insurance.title')}</h3>
           <NavLink to={INSURANCES_ROUTE} style={{ textDecoration: 'none' }}>
-            Читать все
+            {t('insurance.readall')}
           </NavLink>
         </div>
 
@@ -77,5 +79,5 @@ export function InsuranceComponent({ data: insurance }) {
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -19,6 +19,15 @@ app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 app.use('/api', router)
 
+app.use((req, res, next) => {
+  // Извлекаем язык из заголовков запроса
+  const language = req.headers['accept-language'] || 'ru';
+  req.language = language; // Оставляем язык в оригинальном регистре
+
+  // Вызываем следующий мидлвар
+  next();
+});
+
 
 app.use(errorHandler)
 

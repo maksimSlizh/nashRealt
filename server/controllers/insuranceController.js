@@ -7,13 +7,23 @@ const path = require('path')
 class InsuranceController {
   async create(req, res, next) {
     try {
-      const { title, text, description, userId } = req.body
+      const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId } = req.body
       const { img, icon } = req.files
       const fileName = uuid.v4() + '.jpg'
       const iconFileName = uuid.v4() + '_icon.png'
       img.mv(path.resolve(__dirname, '..', 'static', fileName))
       icon.mv(path.resolve(__dirname, '..', 'static', iconFileName))
-      const insurance = await Insurance.create({ title, text, description, img: fileName, icon: iconFileName, userId})
+      const insurance = await Insurance.create(
+        { title_ru,
+          title_pl,
+          text_ru,
+          text_pl,
+          description_ru,
+          description_pl,
+          img: fileName,
+          icon: iconFileName,
+          userId}
+        )
       return res.json(insurance)
     } catch (e) {
       next(ApiError.badRequest(e.message))

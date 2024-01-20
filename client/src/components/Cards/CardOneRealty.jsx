@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import { Carousel } from 'react-bootstrap';
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useState } from 'react'
+import { Carousel } from 'react-bootstrap'
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
+import { useTranslation } from 'react-i18next'
+import { generateTranslationKey } from '../../utils/i18nUtils'
 
 export function CardOneRealty(props) {
-  const { title, price, area, rooms, floor, description, realty_images, address, deposit } = props;
+  const { price, area, rooms, floor, realty_images, address, deposit } = props
+  const { t, i18n } = useTranslation()
 
+  const titleKey = generateTranslationKey('title', i18n.language)
+  const descriptionKey = generateTranslationKey('description', i18n.language)
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -22,14 +27,14 @@ export function CardOneRealty(props) {
   return (
     <section className='mt-5'>
       <div className="container">
-        <h2>{title}</h2>
+        <h2>{t(props[titleKey])}</h2>
         <div className='mt-4 d-flex justify-content-between'>
           <div className='w-50 d-flex flex-column mt-auto mb-auto'>
-            <p>Адрес: {address}</p>
-            <p>Цена: {price} ₽</p>
-            <p>Площадь: {area} м<sup>2</sup></p>
-            <p>Комнат: {rooms}</p>
-            <p>Этаж: {floor}</p>
+            <p>{t('realty.addres')} {address}</p>
+            <p>{t('realty.price')} {price} ₽</p>
+            <p>{t('realty.area')} {area} м<sup>2</sup></p>
+            <p>{t('realty.rooms')} {rooms}</p>
+            <p>{t('realty.floor')} {floor}</p>
           </div>
           <div className='w-50'>
             {realty_images && realty_images.length > 0 && (
@@ -59,7 +64,7 @@ export function CardOneRealty(props) {
           </div>
         </div>
         <hr className='mt-2' />
-        <p className='pt-2' style={{ whiteSpace: 'pre-line', wordWrap: 'break-word', textAlign: 'justify' }}>{description}</p>
+        <p className='pt-2' style={{ whiteSpace: 'pre-line', wordWrap: 'break-word', textAlign: 'justify' }}>{t(props[descriptionKey])}</p>
       </div>
     </section>
   );

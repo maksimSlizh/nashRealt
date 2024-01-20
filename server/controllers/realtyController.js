@@ -8,11 +8,31 @@ class RealtyController {
   async create(req, res, next) {
     try {
 
-      const { title, description, price, area, rooms, floor, address, deposit } = req.body;
+      const {
+        title_ru,
+        title_pl,
+        description_ru,
+        description_pl,
+        price,
+        area,
+        rooms,
+        floor,
+        address,
+        deposit } = req.body;
       const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images] // предполагается, что изображения приходят в поле "images"
 
-      const realty = await Realty.create({ title, description, price, area, rooms, floor, address, deposit });
-      console.log(realty)
+      const realty = await Realty.create(
+        {
+          title_ru,
+          title_pl,
+          description_ru,
+          description_pl,
+          price,
+          area,
+          rooms,
+          floor,
+          address,
+          deposit });
       let realtyImages = [];
       if (images.length > 0) {
         realtyImages = await Promise.all(images.map(async (image) => {

@@ -1,12 +1,19 @@
 import { Image } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { generateTranslationKey } from '../../utils/i18nUtils'
 
 export function CardOne(props) {
+  const { t, i18n } = useTranslation()
+
+  const titleKey = generateTranslationKey('title', i18n.language)
+  const textKey = generateTranslationKey('text', i18n.language)
+
   return (
 
     <>
       <section className='bg-light'>
         <div className="container bg-white">
-          <h2 className='pt-5 text-center'>{props.title}</h2>
+          <h2 className='pt-5 text-center'>{t(props[titleKey])}</h2>
           <div className='mt-5 d-flex justify-content-center ms-auto me-auto'
             style={{ width: '60%', }}>
             <Image
@@ -20,7 +27,7 @@ export function CardOne(props) {
       <section className='bg-light'>
         <div className='container bg-white'>
           <div className='pt-4 '>
-            <p className='p-4' style={{ whiteSpace: 'pre-line', wordWrap: 'break-word', textAlign: 'justify' }}>{props.text}</p>
+            <p className='p-4' style={{ whiteSpace: 'pre-line', wordWrap: 'break-word', textAlign: 'justify' }}>{t(props[textKey])}</p>
           </div>
         </div>
       </section>

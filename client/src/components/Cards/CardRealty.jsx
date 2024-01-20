@@ -3,13 +3,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteRealty } from '../../http/realtyApi'
 import { fetchRealties } from '../../redux/realtySlice'
 import { jwtDecode } from 'jwt-decode'
+import { useTranslation } from 'react-i18next'
+import { generateTranslationKey } from '../../utils/i18nUtils'
 import { REALTY_ROUTE } from '../../utils/consts'
 import { Card } from 'react-bootstrap'
 import noImage from '../../assets/img/noImage.jpg'
 
-export function CardRealty({ realty_images, title, price, id }) {
+export function CardRealty(props) {
+  const { realty_images, price, id } = props
   const { isAuth } = useSelector(state => state.user)
   const dispatch = useDispatch()
+
+  const { t, i18n } = useTranslation()
+
+  const titleKey = generateTranslationKey('title', i18n.language)
 
   let userRole = ''
   const token = localStorage.getItem('token')
@@ -40,7 +47,7 @@ export function CardRealty({ realty_images, title, price, id }) {
               variant="top"
               src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl} style={{ height: '10rem', objectFit: 'cover' }} />
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t(props[titleKey])}</Card.Title>
               <Card.Text>
                 {price}
               </Card.Text>
@@ -61,7 +68,7 @@ export function CardRealty({ realty_images, title, price, id }) {
               variant="top"
               src={noImage} style={{ height: '10rem', objectFit: 'cover' }} />
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t(props[titleKey])}</Card.Title>
               <Card.Text>
                 {price}
               </Card.Text>

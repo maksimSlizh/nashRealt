@@ -1,48 +1,91 @@
-import { FaTelegramPlane } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { IoLogoYoutube } from "react-icons/io";
-import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Button, Form } from 'react-bootstrap'
+import { FaTelegramPlane, FaFacebook, FaInstagram } from "react-icons/fa"
+import { IoLogoYoutube } from "react-icons/io"
+
 
 export function Contacts() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [isEmailValid, setIsEmailValid] = useState(true)
+  const { t } = useTranslation()
+
+  function nameOnChange(e) {
+    setName(e.target.value)
+  }
+  function emailOnChange(e) {
+    const enteredEmail = e.target.value
+    setEmail(enteredEmail)
+
+    // Проверка валидности email
+    const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(enteredEmail)
+    setIsEmailValid(isValidEmail)
+  }
+  function messageOnChange(e) {
+    setMessage(e.target.value)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(name, email, message)
+  }
+
+
   return (
     <section className="mt-5">
       <div className="container">
-        <h1>Наши контакты</h1>
+        <h1>{t('contacts.main')}</h1>
         <div className="mt-5 d-flex justify-content-between">
           <div style={{ width: '48%' }}>
-            <h4 className='mb-4'>Напиши нам!</h4>
-            <Form>
+            <h4 className='mb-4'>{t('contacts.messageus')}</h4>
+            <Form >
               <Form.Group className="mb-3" >
-                <Form.Control type="text" placeholder="Ваше имя" />
+                <Form.Control
+                  type="text"
+                  value={name}
+                  placeholder={t('contacts.name')}
+                  onChange={nameOnChange} />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Control type="email" placeholder="Email" />
+                <Form.Control
+                  type="email"
+                  value={email}
+                  placeholder="Email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  // Регулярное выражение для валидации email
+                  required
+                  onChange={emailOnChange} />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Control as="textarea" rows={3} placeholder="Ваше сообщение" />
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={message}
+                  placeholder={t('contacts.message')}
+                  onChange={messageOnChange} />
               </Form.Group>
 
-              <Button variant="outline-success">Отправить</Button>
+              <Button
+                onClick={handleSubmit} variant="outline-success">{t('contacts.send')}</Button>
             </Form>
           </div>
           <div style={{ width: '48%' }}>
-            <h4 className='mb-4'>Лучше увидеть нас лично!</h4>
-            <p>Мы любим наших клиентов, поэтому не стесняйтесь посещать нас в рабочее время.</p>
+            <h4 className='mb-4'>{t('contacts.titlesecond')}</h4>
+            <p>{t('contacts.textinfo')}</p>
             <h4>NashRealt</h4>
             <p>Al. Grunwaldzka 76/78 lok. -106, 80-244 Gdańsk</p>
-            <p>Время работы:
-              Понедельник - Пятница 10:00 - 18:00
-              Суббота 10:00 - 14:00
-              Воскресенье - выходной</p>
-            <p>+48 512-713-386 Каролина</p>
-            <p>+48 518-248-134 Юлия</p>
+            <p>{t('contacts.worktime')}</p>
+              <p>{t('contacts.worktime1')}</p>
+              <p>{t('contacts.worktime2')}</p>
+              <p>{t('contacts.worktime3')}</p>
+            <p>+48 512-713-386 {t('contacts.user1')}</p>
+            <p>+48 518-248-134 {t('contacts.user2')}</p>
           </div>
         </div>
 
         <div className='mt-5'>
-          <h4>Мы в социальных сетях</h4>
+          <h4>{t('contacts.social')}</h4>
           <hr />
           <div className='d-flex gap-5 align-items-center pt-4 pb-4  justify-content-center'>
             <a
@@ -80,7 +123,7 @@ export function Contacts() {
         </div>
 
         <div className='mt-3'>
-          <h4>Как нас найти</h4>
+          <h4>{t('contacts.findus')}</h4>
           <hr />
 
           <div className="d-flex justify-content-between pt-3 pb-4">

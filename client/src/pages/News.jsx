@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { CardNews } from '../components/Cards/CardNews'
 import { fetchNews } from '../redux/newsSlice'
 import { Pages } from '../components/Pages'
@@ -9,6 +10,7 @@ export function News() {
   const { news, totalCount, limit } = useSelector(state => state.news)
   const { page } = useParams()
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   useEffect(() => {
     dispatch(fetchNews({ page }))
@@ -24,7 +26,7 @@ export function News() {
       className='container mt-5 d-flex flex-column justify-content-between'
       style={{ minHeight: 'calc(100vh - 118px)' }}>
         <div>
-          <h1>Новости</h1>
+          <h1>{t('news.title')}</h1>
           <div className='mt-4 mb-5 card-grid'>
             {news.map(el => {
               return <CardNews key={el.id} {...el} />

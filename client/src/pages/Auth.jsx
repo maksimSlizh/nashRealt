@@ -1,19 +1,20 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { setUser, setIsAuth } from '../redux/userSlice'
 import { PREW_ROUTE, REGISTRATION_ROUTE, LOGIN_ROUTE } from '../utils/consts'
 import { login, registration } from '../http/userApi'
 
 
 export function Auth() {
-  const { user } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
   const isLogin = location.pathname === LOGIN_ROUTE
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { t } = useTranslation()
 
   const click = async (e) => {
     e.preventDefault()
@@ -35,23 +36,26 @@ export function Auth() {
 
   }
   return (
-    <>
+    <section className='mt-4'>
       <div className="container">
-        <NavLink to={PREW_ROUTE}>Back to home</NavLink>
-        <h2>{isLogin ? 'Login' : 'Registration'}</h2>
-        <form className='d-flex flex-column ms-auto me-auto p-4 border border-black ' style={{ width: '500px' }}>
+        <NavLink
+        to={PREW_ROUTE}
+        style={{ textDecoration: 'none'}}
+        >{t('auth.link')}</NavLink>
+        <h2 className='mt-5 mb-3'>{isLogin ? `${t('auth.login')}` : `${t('auth.register')}`}</h2>
+        <form className='auth-form' >
           <div className="mb-3">
-            <label className="form-label">Email address</label>
+            <label className="form-label">{t('auth.email')}</label>
             <input
               type="email"
               className="form-control"
               aria-describedby="emailHelp"
               value={email}
               onChange={e => setEmail(e.target.value)} />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+            <div id="emailHelp" className="form-text">{t('auth.emailinfo')}</div>
           </div>
           <div className="mb-3">
-            <label className="form-label">Password</label>
+            <label className="form-label">{t('auth.password')}</label>
             <input
               type="password"
               className="form-control"
@@ -59,24 +63,24 @@ export function Auth() {
               onChange={e => setPassword(e.target.value)} />
           </div>
           {isLogin ?
-            <p>If you dont have account, you can <NavLink
+            <p>{t('auth.ifnoaccount')}  <NavLink
               to={REGISTRATION_ROUTE}
-              className='hover-effect' >sign up</NavLink>
+              className='hover-effect' >{t('auth.registerlink')}</NavLink>
             </p> :
             <p>
-              If you already have account, you can <NavLink
+              {t('auth.ifhasaccount')} <NavLink
                 to={LOGIN_ROUTE}
-                className='hover-effect' >sign in</NavLink>
+                className='hover-effect' >{t('auth.loginlink')}</NavLink>
             </p>}
 
           <button
             type="submit"
             className="btn btn-primary align-self-end"
             onClick={click}
-          >{isLogin ? 'Login' : 'Registration'}</button>
+          >{isLogin ? `${t('auth.login')}` : `${t('auth.send')}`}</button>
 
         </form>
       </div>
-    </>
+    </section>
   )
 }

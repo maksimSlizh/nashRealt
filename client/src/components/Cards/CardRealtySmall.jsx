@@ -1,9 +1,15 @@
 import { NavLink } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
+import { useTranslation } from 'react-i18next'
+import { generateTranslationKey } from '../../utils/i18nUtils'
 import { REALTY_ROUTE } from '../../utils/consts'
 import noImage from '../../assets/img/noImage.jpg'
 
-export function CardRealtySmall({ realty_images, title, price, id }) {
+export function CardRealtySmall(props) {
+  const { realty_images, price, id } = props
+  const { t, i18n } = useTranslation()
+
+  const titleKey = generateTranslationKey('title', i18n.language)
 
   const renderCard = () => {
     if (realty_images && realty_images.length > 0) {
@@ -17,7 +23,7 @@ export function CardRealtySmall({ realty_images, title, price, id }) {
               variant="top"
               src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl} style={{ height: '10rem', objectFit: 'cover' }} />
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t(props[titleKey])}</Card.Title>
               <Card.Text>
                 {price}
               </Card.Text>
@@ -34,7 +40,7 @@ export function CardRealtySmall({ realty_images, title, price, id }) {
               variant="top"
               src={noImage} style={{ height: '10rem', objectFit: 'cover' }} />
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t(props[titleKey])}</Card.Title>
               <Card.Text>
                 {price}
               </Card.Text>

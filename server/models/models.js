@@ -16,18 +16,23 @@ const User = sequelize.define('user', {
 // })
 
 const News = sequelize.define('news', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, unique: true, allowNull: false},
-  text: {type: DataTypes.STRING(5000), allowNull: false},
-  img: {type: DataTypes.STRING, allowNull: false},
-  description: {type: DataTypes.STRING, allowNull: false},
-  userId: { type: DataTypes.INTEGER, allowNull: false }
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title_ru: { type: DataTypes.STRING, allowNull: false },
+  title_pl: { type: DataTypes.STRING, allowNull: false },
+  text_ru: { type: DataTypes.STRING(5000), allowNull: false },
+  text_pl: { type: DataTypes.STRING(5000), allowNull: false },
+  description_ru: { type: DataTypes.STRING, allowNull: false },
+  description_pl: { type: DataTypes.STRING, allowNull: false },
+  img: { type: DataTypes.STRING, allowNull: false },
+  userId: { type: DataTypes.INTEGER, allowNull: false },
 })
 
 const Realty = sequelize.define('realty', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, unique: true, allowNull: false},
-  description: {type: DataTypes.STRING(2500), allowNull: false},
+  title_ru: {type: DataTypes.STRING, unique: true, allowNull: false},
+  title_pl: {type: DataTypes.STRING, unique: true, allowNull: false},
+  description_ru: {type: DataTypes.STRING(2500), allowNull: false},
+  description_pl: {type: DataTypes.STRING(2500), allowNull: false},
   address: {type: DataTypes.STRING, allowNull: false},
   deposit: {type: DataTypes.STRING},
   price: {type: DataTypes.STRING, allowNull: false},
@@ -44,11 +49,14 @@ const RealtyImage = sequelize.define('realty_image', {
 
 const Insurance = sequelize.define('insurance', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, unique: true, allowNull: false},
-  text: {type: DataTypes.STRING(2500), allowNull: false},
+  title_ru: {type: DataTypes.STRING, unique: true, allowNull: false},
+  title_pl: {type: DataTypes.STRING, unique: true, allowNull: false},
+  text_ru: {type: DataTypes.STRING(2500), allowNull: false},
+  text_pl: {type: DataTypes.STRING(2500), allowNull: false},
   img: {type: DataTypes.STRING, allowNull: false},
   icon: {type: DataTypes.STRING},
-  description: {type: DataTypes.STRING, allowNull: false},
+  description_ru: {type: DataTypes.STRING, allowNull: false},
+  description_pl: {type: DataTypes.STRING, allowNull: false},
   userId: { type: DataTypes.INTEGER, allowNull: false }
 })
 

@@ -1,0 +1,11 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 40px;
+  width: 500px;
+  border: 1px solid $gray-300;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
+  background-color: $gray-100;
+}

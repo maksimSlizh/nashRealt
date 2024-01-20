@@ -7,7 +7,11 @@
 @import "./slider/slider";
 @import "./insurance/insurance";
 @import "./card-link/card-link";
+@import "./auth-form/auth-form";
 
+body {
+  font-family: "Roboto", sans-serif;
+}
 
 .hover-effect {
   text-decoration: none;

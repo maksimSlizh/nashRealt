@@ -1,20 +1,27 @@
-import { NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
+import { useTranslation } from 'react-i18next'
+import { generateTranslationKey } from '../../utils/i18nUtils'
 import { NEWS_ROUTE } from '../../utils/consts'
 
 export function CardNewsSmall(props) {
+  const { t, i18n } = useTranslation();
+
+  const titleKey = generateTranslationKey('title', i18n.language);
+  const descriptionKey = generateTranslationKey('description', i18n.language);
+
   return (
     <NavLink
-    to={`${NEWS_ROUTE}/selected/${props.id}`}
-    className="card-link" >
-      <Card  style={{ width: '18rem', height: '18rem' }}>
+      to={`${NEWS_ROUTE}/selected/${props.id}`}
+      className="card-link" >
+      <Card style={{ width: '18rem', height: '18rem' }}>
         <Card.Img
           variant="top"
           src={import.meta.env.VITE_REACT_APP_API_URL + props.img} style={{ height: '10rem', objectFit: 'cover' }} />
         <Card.Body>
-          <Card.Title>{props.title}</Card.Title>
+          <Card.Title>{t(props[titleKey])}</Card.Title>
           <Card.Text>
-            {props.description}
+            {t(props[descriptionKey])}
           </Card.Text>
         </Card.Body>
       </Card>
