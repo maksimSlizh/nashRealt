@@ -19,7 +19,7 @@ export function CardOne(props) {
             <Image
               src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
               alt=""
-              style={{ objectFit: 'cover', maxHeight: '60vh' }}
+              style={{ objectFit: 'cover', maxHeight: '60vh', boxShadow: '0 0 10px rgba(0,0,0,0.7)', borderRadius: '10px'}}
             />
           </div>
         </div>

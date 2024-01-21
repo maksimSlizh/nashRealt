@@ -1,0 +1,32 @@
+.locales-link {
+  margin-left: 50px;
+  display: flex;
+  gap: 0.5rem;
+  &__btn-selected {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: $yellow-400;
+    color: $gray-900;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.276);
+  }
+
+  &__btn-selected:hover {
+    background-color: $yellow-600;
+  }
+
+  &__btn-unselected {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: $gray-200;
+    color: $gray-900;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.276);
+  }
+
+  &__btn-unselected:hover {
+    background-color: $gray-500;
+  }
+}

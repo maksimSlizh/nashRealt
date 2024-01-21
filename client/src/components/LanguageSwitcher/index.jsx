@@ -8,9 +8,13 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div>
-      <button onClick={() => changeLanguage('ru')}>RU</button>
-      <button onClick={() => changeLanguage('pl')}>PL</button>
+    <div className='locales-link'>
+      <button
+      className={i18n.language === 'ru' ? 'locales-link__btn-selected' : ' locales-link__btn-unselected'}
+      onClick={() => changeLanguage('ru')}>RU</button>
+      <button
+      className={i18n.language === 'pl' ? 'locales-link__btn-selected' : 'locales-link__btn-unselected'}
+      onClick={() => changeLanguage('pl')}>PL</button>
     </div>
   );
 };

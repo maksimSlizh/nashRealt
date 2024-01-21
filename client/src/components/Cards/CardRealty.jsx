@@ -42,7 +42,7 @@ export function CardRealty(props) {
         <NavLink
         to={`${REALTY_ROUTE}/selected/${id}`}
         className="card-link" >
-          <Card className="" style={{ width: '100%' }}>
+          <Card className="custom-card">
             <Card.Img
               variant="top"
               src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl} style={{ height: '10rem', objectFit: 'cover' }} />

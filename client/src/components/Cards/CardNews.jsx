@@ -33,8 +33,10 @@ export function CardNews(props) {
   }
 
   return (
-    <NavLink to={NEWS_ROUTE + '/selected' + '/' + props.id} className="card-link">
-      <div className="card" style={{ width: '100%' }}>
+    <NavLink to={NEWS_ROUTE + '/selected' + '/' + props.id} className="card-link" style={{
+      width: '18rem'
+    }}>
+      <div className="card custom-card">
         <img src={import.meta.env.VITE_REACT_APP_API_URL + props.img} className="card-img-top" alt="..." style={{ height: '10rem', objectFit: 'cover' }} />
         <div className="card-body d-flex flex-column justify-content-between">
           <h5 className="card-title">{t(props[titleKey])}</h5>

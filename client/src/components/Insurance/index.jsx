@@ -9,7 +9,6 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 export function InsuranceComponent({ data: insurance }) {
   const cardsPerSlide = 3
   const { t } = useTranslation()
-
   // Разбиваем массив карточек на группы по 3
   const groupedInsurance = [];
   for (let i = 0; i < insurance.length; i += cardsPerSlide) {
@@ -67,7 +66,7 @@ export function InsuranceComponent({ data: insurance }) {
               ref={carouselRef}>
               {groupedInsurance.map((group, index) => (
                 <Carousel.Item key={index} className='mt-5'>
-                  <div className="d-flex gap-5 slider__countainer">
+                  <div className="d-flex gap-5 slider__countainer" >
                     {group.map((item) => (
                       <CardInsuranceSmall key={item.id} {...item} />
                     ))}
