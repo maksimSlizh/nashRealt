@@ -29,7 +29,8 @@ export function NavbarComponent() {
   const [showOffcanvas, setShowOffcanvas] = useState(false)
   const token = localStorage.getItem('token')
   const { t, i18n } = useTranslation()
-  let userRole = '';
+  let userRole = ''
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 576)
 
   if (token) {
     const decodedToken = jwtDecode(token)
@@ -46,11 +47,17 @@ export function NavbarComponent() {
     }
   }
 
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth < 576);
+  }
+
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick)
+    window.addEventListener('resize', handleResize)
 
     return () => {
       document.removeEventListener('click', handleOutsideClick)
+      window.removeEventListener('resize', handleResize)
     }
   }, [showOffcanvas])
 
@@ -73,11 +80,15 @@ export function NavbarComponent() {
         <Navbar.Brand as={NavLink} to={PREW_ROUTE}>
           <img src={logo} alt="logo" style={{ width: '50px', height: 'auto' }} />
         </Navbar.Brand>
-        <LanguageSwitcher />
+        {!isSmallScreen &&
+          <LanguageSwitcher />}
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setShowOffcanvas(!showOffcanvas)} />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" in={showOffcanvas}>
 
           <Nav className="ml-auto">
+          {isSmallScreen && (
+              <LanguageSwitcher />
+            )}
             <Nav.Link
               as={NavLink}
               to={PREW_ROUTE}
@@ -130,11 +141,19 @@ export function NavbarComponent() {
               </Nav.Link>
             )}
             {isAuth ? (
-              <Button variant="outline-success ms-1" onClick={logOut} >
+              <Button
+              variant="outline-success ms-1"
+              onClick={logOut}
+              className='custom-button' >
                 {t('navbar.logout')}
               </Button>
             ) : (
-              <Button variant="outline-success ms-1" as={NavLink} to={LOGIN_ROUTE} onClick={closeOffcanvas}>
+              <Button
+              variant="outline-success ms-1"
+              as={NavLink}
+              to={LOGIN_ROUTE}
+              onClick={closeOffcanvas}
+              className='custom-button'>
                 {t('navbar.login')}
               </Button>
             )}

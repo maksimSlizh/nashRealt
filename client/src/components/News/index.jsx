@@ -1,20 +1,41 @@
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { CardNewsSmall } from '../Cards/CardNewsSmall'
 import { NEWS_ROUTE } from '../../utils/consts'
+import {calculateItemsToDisplay } from '../../helpers'
 
 export function NewsComponent({ data: news }) {
   const { t } = useTranslation()
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
+  // Добавьте слушатель события изменения размера окна при монтировании компонента
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  // Используйте windowWidth для определения количества элементов для отображения
+  const itemsToDisplay = calculateItemsToDisplay(windowWidth)
+
   return (
-    <section className="pt-5 pb-5 bg-light">
+    <section className="prew-news bg-light">
       <div className='container'>
-        <div className='d-flex align-items-center pt-4 ps-5'>
-          <h3 className='pe-5'>{t('prew.newstitle')}</h3>
-          <NavLink to={`${NEWS_ROUTE}/1`} style={{ textDecoration: 'none' }}>{t('prew.newslink')}</NavLink>
+        <div className='prew__header'>
+          <h3 className='prew__title-small'>{t('prew.newstitle')}</h3>
+          <NavLink
+          to={`${NEWS_ROUTE}/1`}
+          className='prew-link'>{t('prew.newslink')}</NavLink>
         </div>
-        <div className='pt-5 pb-5  d-flex bg-white gap-4 justify-content-center'>
-          {news.slice(0, 4).map(item => <CardNewsSmall key={item.id} {...item} />)}
+        <div className='prew-news__list bg-white'>
+        {news.slice(0, itemsToDisplay).map(item => <CardNewsSmall key={item.id} {...item} />)}
         </div>
       </div>
     </section>

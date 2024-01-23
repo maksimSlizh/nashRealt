@@ -11,6 +11,10 @@
     transition: color 0.3s ease;
     margin-bottom: 3px; /* отступ между текстом и линией снизу */
 
+    @media screen and (max-width: 1200px) {
+      font-size: 14px;
+    }
+
     &:hover {
       color: $yellow-600;
       border-bottom: 2px solid $yellow-600;

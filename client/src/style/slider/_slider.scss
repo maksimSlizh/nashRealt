@@ -32,7 +32,16 @@
   }
 
   &__container {
-    width: 500px;
+    display: flex;
+    gap: 3rem;
+
+    @media screen and (max-width: 1400px) {
+      gap: 2rem;
+    }
+
+    @media screen and (max-width: 1200px) {
+      gap: 1.5rem;
+    }
   }
 
 }

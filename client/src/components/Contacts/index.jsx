@@ -10,18 +10,18 @@ export function ContactsComponent() {
   const { t } = useTranslation()
 
   return (
-    <section className="bg-dark ">
+    <section className="bg-dark prew-contants ">
       <div className="container d-flex flex-column align-items-center justify-content-center">
-        <div className='d-flex align-items-center pt-4 ps-5 pb-5'>
-          <h3 className='text-white'>{t('contacts.prewtitle')}</h3>
+        <div className='prew-contacts__header'>
+          <h3 className='text-white prew-contacts-title'>{t('contacts.prewtitle')}</h3>
         </div>
 
-        <div className='pb-5 ps-5 d-flex justify-content-between'>
+        <div className='pb-5 d-flex justify-content-between'>
           <div className='d-flex flex-column'>
 
             <div >
-              <p className='text-white'>+48 512-713-386 {t('contacts.user1')}</p>
-              <p className='text-white'>+48 518-248-134 {t('contacts.user2')}</p>
+              <p className='text-white prew-contacts__text'>+48 512-713-386 {t('contacts.user1')}</p>
+              <p className='text-white prew-contacts__text'>+48 518-248-134 {t('contacts.user2')}</p>
             </div>
 
             <div className='d-flex gap-4 align-items-center pt-3 pb-5'>
@@ -30,7 +30,7 @@ export function ContactsComponent() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className='icon-link'>
-                <FaTelegramPlane size={30} style={{ color: 'white' }} className='icon' />
+                <FaTelegramPlane size={30} style={{ color: 'white' }} className='icon ' />
               </a>
               <a
                 href='https://www.facebook.com/nashrealt'
@@ -38,7 +38,8 @@ export function ContactsComponent() {
                 rel="noopener noreferrer"
                 className='icon-link'
               >
-                <FaFacebook size={30} style={{ color: 'white' }} className='icon' />
+                <FaFacebook
+                size={30} style={{ color: 'white' }} className='icon ' />
               </a>
               <a
                 href='https://www.youtube.com/channel/UCK33ufcWvMzTpbR2pF-PdLw'
@@ -46,7 +47,7 @@ export function ContactsComponent() {
                 rel="noopener noreferrer"
                 className='icon-link'
               >
-                <IoLogoYoutube size={30} style={{ color: 'white' }} className='icon' />
+                <IoLogoYoutube size={30} style={{ color: 'white' }} className='icon ' />
               </a>
               <a
                 href='https://www.instagram.com/nashrealt/'
@@ -54,13 +55,13 @@ export function ContactsComponent() {
                 rel="noopener noreferrer"
                 className='icon-link'
               >
-                <FaInstagram size={30} style={{ color: 'white' }} className='icon' />
+                <FaInstagram size={30} style={{ color: 'white' }} className='icon ' />
               </a>
             </div>
 
             <Button
               variant="outline-light"
-              className='mt-auto'
+              className='mt-auto prew-contacts__button'
               onClick={() => navigate(CONTACTS_ROUTE)}>{t('contacts.prewbutton')}</Button>
           </div>
 

@@ -21,10 +21,12 @@ export function CardRealtySmall(props) {
           <Card className="custom-card">
             <Card.Img
               variant="top"
-              src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl} style={{ height: '10rem', objectFit: 'cover' }} />
+              src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl} className='custom-card__img' />
             <Card.Body>
-              <Card.Title>{t(props[titleKey])}</Card.Title>
-              <Card.Text>
+              <Card.Title
+              className='custom-card__title'>{t(props[titleKey])}</Card.Title>
+              <Card.Text
+              className='custom-card__text'>
                 {price}
               </Card.Text>
             </Card.Body>

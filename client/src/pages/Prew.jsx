@@ -23,7 +23,7 @@ export function Prew() {
       <InsuranceComponent data={insurance} />
       <RealtyComponent data={realties} />
       <ContactsComponent />
-      <footer className='mt-2 ms-3'>
+      <footer className='mt-2'>
         <div className='container text-center'>
           <p>&copy; 2024. All rights reserved.</p>
         </div>

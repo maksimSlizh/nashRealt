@@ -1,22 +1,42 @@
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { REALTY_ROUTE } from '../../utils/consts'
 import { CardRealtySmall } from '../Cards/CardRealtySmall'
+import {calculateItemsToDisplay } from '../../helpers'
 
 export function RealtyComponent({ data: realties }) {
   const { t } = useTranslation()
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
+  // Добавьте слушатель события изменения размера окна при монтировании компонента
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  // Используйте windowWidth для определения количества элементов для отображения
+  const itemsToDisplay = calculateItemsToDisplay(windowWidth)
+
   return (
-    <section className="">
+    <section className="prew-realty">
       <div className="container">
-        <div className='d-flex align-items-center pt-4 ps-5 pb-5'>
-          <h3 className='pe-5'>{t('realty.title')}</h3>
-          <NavLink to={`${REALTY_ROUTE}/1`} style={{ textDecoration: 'none' }}>{t('realty.readmore')}</NavLink>
+        <div className='prew__header'>
+          <h3 className='prew__title-small'>{t('realty.title')}</h3>
+          <NavLink to={`${REALTY_ROUTE}/1`}
+          className='prew-link'>{t('realty.readmore')}</NavLink>
         </div>
-        <p className='ps-5'>{t('realty.prewfirst')}
+        <p className='prew-realty__text'>{t('realty.prewfirst')}
           <b> {t('realty.prewmiddle')} </b> {t('realty.prewsecond')}</p>
-        <div className='pt-5 pb-5  d-flex bg-white gap-4 justify-content-center'>
-          {realties.slice(0, 4).map(item => <CardRealtySmall key={item.id} {...item} />)}
+        <div className='prew-news__list'>
+          {realties.slice(0, itemsToDisplay).map(item => <CardRealtySmall key={item.id} {...item} />)}
         </div>
       </div>
     </section>

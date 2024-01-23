@@ -1,0 +1,64 @@
+.prew-insurance {
+ padding-bottom: 3rem;
+
+ &__info {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0 1.5rem 3rem;
+ }
+
+ &__body {
+  margin-top: 1.5rem;
+  padding-bottom: 3rem;
+  display: flex;
+
+  @media screen and (max-width: 1400px) {
+    flex-direction: column-reverse;
+
+  }
+
+  @media screen and (max-width: 992px) {
+    flex-direction: row;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+
+  @media screen and (max-width: 576px) {
+    flex-direction: row;
+  }
+ }
+
+
+ &__buttons {
+  display: flex;
+
+  @media screen and (max-width: 1400px) {
+    padding-top: 1.5rem;
+    justify-content: center;
+  }
+ }
+
+ &__list {
+
+
+  @media screen and (max-width: 1400px) {
+    padding: 0 4.5rem;
+  }
+
+  @media screen and (max-width: 992px) {
+    padding: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0 2.5rem;
+  }
+
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
+ }
+
+
+}

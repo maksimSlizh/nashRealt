@@ -1,0 +1,29 @@
+.prew-contacts {
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0 3rem 0;
+  }
+
+  &__title {
+
+    @media screen and (max-width: 576px) {
+      font-size: 16px;
+    }
+  }
+
+  &__text {
+
+    @media screen and (max-width: 576px) {
+      font-size: 12px;
+    }
+  }
+
+  &__button {
+
+    @media screen and (max-width: 576px) {
+      font-size: 12px;
+    }
+  }
+}

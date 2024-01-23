@@ -2,6 +2,11 @@
   margin-left: 50px;
   display: flex;
   gap: 0.5rem;
+
+  @media screen and (max-width: 992px) {
+    margin-left: 0;
+  }
+
   &__btn-selected {
     border: none;
     padding: 0.5rem;

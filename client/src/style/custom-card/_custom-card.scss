@@ -2,4 +2,58 @@
   width: 18rem;
   height: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  @media screen and (max-width: 1200px) {
+    width: 15rem;
+  }
+
+  @media screen and (max-width: 992px) {
+    width: 12rem;
+  }
+
+
+  &__insurance {
+    width: 18rem;
+    height: 18rem;
+
+    @media screen and (max-width: 1200px) {
+      width: 15rem;
+      height: 15rem;
+    }
+
+    @media screen and (max-width: 992px) {
+      width: 12rem;
+      height: 12rem;
+    }
+  }
+  &__title {
+
+    @media screen and (max-width: 1200px) {
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 992px) {
+      font-size: 14px;
+    }
+  }
+
+  &__text {
+
+    @media screen and (max-width: 1200px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 992px) {
+      display: none;
+    }
+  }
+
+  &__img {
+    height: 10rem;
+    object-fit: cover;
+
+    @media screen and (max-width: 992px) {
+      height: 6rem;
+    }
+  }
 }

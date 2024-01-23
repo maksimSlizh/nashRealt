@@ -13,15 +13,15 @@ export function CardInsuranceSmall(props) {
     <NavLink
     to={`${INSURANCES_ROUTE}/selected/${props.id}`}
     className="card-link">
-      <Card className="" style={{ width: '18rem', height: '18rem'}}>
+      <Card className="custom-card__insurance" >
         <Card.Img
           variant="top"
           src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
-          style={{ height: '10rem', objectFit: 'cover' }}
-          draggable="false"
+          className='custom-card__img'
         />
         <Card.Body>
-          <Card.Title>{t(props[titleKey])}</Card.Title>
+          <Card.Title
+          className='custom-card__title'>{t(props[titleKey])}</Card.Title>
         </Card.Body>
       </Card>
     </NavLink>

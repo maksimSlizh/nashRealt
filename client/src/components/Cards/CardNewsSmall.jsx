@@ -17,10 +17,12 @@ export function CardNewsSmall(props) {
       <Card className="custom-card">
         <Card.Img
           variant="top"
-          src={import.meta.env.VITE_REACT_APP_API_URL + props.img} style={{ height: '10rem', objectFit: 'cover' }} />
+          src={import.meta.env.VITE_REACT_APP_API_URL + props.img} className='custom-card__img' />
         <Card.Body>
-          <Card.Title>{t(props[titleKey])}</Card.Title>
-          <Card.Text>
+          <Card.Title
+          className='custom-card__title'>{t(props[titleKey])}</Card.Title>
+          <Card.Text
+          className='custom-card__text'>
             {t(props[descriptionKey])}
           </Card.Text>
         </Card.Body>

@@ -1,0 +1,14 @@
+.prew-news {
+  padding: 3rem 0;
+
+  &__list {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+
+    @media screen and (max-width: 576px) {
+      flex-wrap: wrap;
+    }
+  }
+}
