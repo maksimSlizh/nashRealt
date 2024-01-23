@@ -4,16 +4,39 @@
   grid-gap: 3rem;
   grid-auto-rows: minmax(auto, max-content); // Adjust the height of each grid item based on its content
 
+  @media screen and (max-width: 1200px) {
+    grid-gap: 2rem; /* Corrected from gird-gap to grid-gap */
+  }
+
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 576px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   &__link {
     text-decoration: none;
     color: #000000;
-  }
+    width: 340px;
 
+    @media screen and (max-width: 1200px) {
+      width: 290px;
+    }
+
+    @media screen and (max-width: 992px) {
+      width: 250px;
+      margin: auto;
+    }
+
+  }
 
   &__item {
     display: flex;
     justify-content: space-between;
     height: 300px;
+    width: 340px;
     border-radius: 20px;
     padding: 15px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
@@ -24,6 +47,19 @@
       transform: translateY(-10px);
       background-color: $yellow-400;
     }
+
+    @media screen and (max-width: 1200px) {
+      width: 290px;
+    }
+
+    @media screen and (max-width: 992px) {
+      width: 250px;
+      height: 250px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 250px;
+    }
   }
 
   &__text {
@@ -31,5 +67,21 @@
     font-size: 25px;
     line-height: 1.2;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 992px) {
+      font-size: 16px;
+    }
+  }
+
+  &__img {
+    width: 100px;
+
+    @media screen and (max-width: 992px) {
+      width: 70px;
+    }
   }
 }

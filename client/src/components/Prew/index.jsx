@@ -9,7 +9,7 @@ export function PrewComponent() {
           <div className='prew__info'>
             <img src={logo}
             className='prew__logo'
-            style={{ width: '40%', objectFit: 'contain' }} alt="" />
+            alt="" />
             <h2 className='prew__title'>
               BIURO NEIRUCHOMOŚCI UBEZPIECZENI
             </h2>
@@ -17,7 +17,7 @@ export function PrewComponent() {
 
 
           <img src={unilink}
-          className='prew__partner' style={{ width: '35%' }} alt="" />
+          className='prew__partner' alt="" />
         </div>
       </div>
     </section>

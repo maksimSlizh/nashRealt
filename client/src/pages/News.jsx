@@ -37,7 +37,7 @@ export function News() {
       className='container mt-5 d-flex flex-column justify-content-between'
       style={{ minHeight: 'calc(100vh - 118px)' }}>
         <div>
-          <h1>{t('news.title')}</h1>
+          <h1 className='title-page'>{t('news.title')}</h1>
           <div className='mt-4 mb-5 card-grid'>
             {news.map(el => {
               return <CardNews key={el.id} {...el} />
