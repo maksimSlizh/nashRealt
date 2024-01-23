@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CardNews } from '../components/Cards/CardNews'
 import { fetchNews } from '../redux/newsSlice'
@@ -7,18 +7,29 @@ import { Pages } from '../components/Pages'
 import { useParams } from 'react-router-dom'
 
 export function News() {
-  const { news, totalCount, limit } = useSelector(state => state.news)
+  const { news, totalCount, limit } = useSelector((state) => state.news)
   const { page } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const [dynamicLimit, setDynamicLimit] = useState(8) // Default limit, adjust as needed
 
   useEffect(() => {
-    dispatch(fetchNews({ page }))
-  }, [dispatch, page])
+    const handleResize = () => {
+      const screenWidth = window.innerWidth
+      // Calculate dynamic limit based on the screen width
+      const newLimit = screenWidth < 1400 ? 6 : 8
+      setDynamicLimit(newLimit)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   useEffect(() => {
-    dispatch(fetchNews({ page }))
-  }, [dispatch])
+    dispatch(fetchNews({ page, limit: dynamicLimit }))
+  }, [dispatch, page, dynamicLimit])
 
   return (
     <section className="" >

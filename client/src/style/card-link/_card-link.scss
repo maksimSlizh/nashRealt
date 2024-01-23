@@ -2,6 +2,16 @@
   text-decoration: none;
   position: relative;
   transition: transform 0.3s, color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  width: 18rem;
+  border-radius: 5px;
+
+  @media screen and (max-width: 1200px) {
+    width: 15rem;
+  }
+
+  @media screen and (max-width: 992px) {
+    width: 12rem;
+  }
 }
 
 .card-link::before {

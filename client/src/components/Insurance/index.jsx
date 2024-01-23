@@ -45,8 +45,6 @@ export function InsuranceComponent({ data: insurance }) {
   }
 
   const useBootstrapCarousel = windowWidth < 600
-  console.log(useBootstrapCarousel)
-  console.log(windowWidth)
 
   return (
     <section className="bg-light prew-insurance">
