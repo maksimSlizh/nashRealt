@@ -18,10 +18,9 @@
   &__image {
     width: 100%;
     max-width: 1400px;
-    object-fit: cover;
+    object-fit: contain;
     max-height: 60vh;
-    box-shadow: 0 0 10px rgba(0,0,0,0.7);
-    border-radius: 10px;
+
 
     @media screen and (max-width: 1200px) {
       max-width: 1200px;
@@ -29,6 +28,9 @@
     }
 
     @media screen and (max-width: 992px) {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      object-fit: cover;
       max-width: 900px;
     }
 

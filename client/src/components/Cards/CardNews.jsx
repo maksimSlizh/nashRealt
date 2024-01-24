@@ -25,7 +25,7 @@ export function CardNews(props) {
 
   const handleDelete = async (id) => {
     try {
-      await deleteNews(id);
+      await deleteNews(id)
       dispatch(fetchNews({ page: 1 }))
     } catch (error) {
       // Обработка ошибок
