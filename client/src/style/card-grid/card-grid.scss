@@ -21,3 +21,23 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+.card-grid__realty {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  grid-auto-rows: minmax(auto, max-content); // Adjust the height of each grid item based on its content
+
+  > * {
+    break-inside: avoid; // Prevent grid items from breaking across columns
+  }
+
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  @media screen and (max-width: 576px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

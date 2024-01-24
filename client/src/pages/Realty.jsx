@@ -18,17 +18,14 @@ export function Realty() {
     dispatch(fetchRealties({ page }))
   }, [dispatch, page])
 
-  useEffect(() => {
-    dispatch(fetchRealties({ page }))
-  }, [dispatch])
   return (
-    <section className="mt-5">
+    <section className="mt-5 realty">
       <div className='container'>
-        <h3 className='pb-5'>{t('realty.main')}</h3>
+        <h3 className='pb-5 title-page'>{t('realty.main')}</h3>
 
-        <div className='d-flex'>
-          <div className=''>
-            <p>{t('realty.prewfirst')}
+        <div className='realty__wrapper'>
+          <div className='realty__info'>
+            <p className='realty__text'>{t('realty.prewfirst')}
               <b> {t('realty.prewmiddle')}</b> {t('realty.prewsecond')}:</p>
             <ul>
               <li>{t('realty.li1')}</li>
@@ -47,11 +44,12 @@ export function Realty() {
             </ul>
             <p>{t('realty.license')} N 28352</p>
           </div>
-          <img src={agensy} style={{ width: '50%' }} alt="" />
+          <img src={agensy}
+            className='realty__img' alt="" />
         </div>
-        <h4 className='mt-5'>{t('realty.offer')}</h4>
+        <h4 className='realty__title-offer'>{t('realty.offer')}</h4>
         <hr />
-        <div className='mt-4 mb-5 card-grid'>
+        <div className='mt-4 mb-5 card-grid__realty'>
         {realties.map(el => {
           return <CardRealty key={el.id} {...el} />
         })}

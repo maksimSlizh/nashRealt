@@ -11,15 +11,17 @@ export function News() {
   const { page } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const [dynamicLimit, setDynamicLimit] = useState(8) // Default limit, adjust as needed
+  const initialWindowWidth = window.innerWidth
+  const [dynamicLimit, setDynamicLimit] = useState(initialWindowWidth < 1400 ? 6 : 8)
+
+  const handleResize = () => {
+    const screenWidth = window.innerWidth
+    // Calculate dynamic limit based on the screen width
+    const newLimit = screenWidth < 1400 ? 6 : 8
+    setDynamicLimit(newLimit)
+  }
 
   useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth
-      // Calculate dynamic limit based on the screen width
-      const newLimit = screenWidth < 1400 ? 6 : 8
-      setDynamicLimit(newLimit)
-    }
 
     window.addEventListener('resize', handleResize)
     return () => {

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import {fetchNews} from '../redux/newsSlice'
 import { fetchRealties } from '../redux/realtySlice'
 import { PrewComponent } from '../components/Prew'
 import { NewsComponent } from '../components/News'
@@ -8,14 +9,16 @@ import { RealtyComponent } from '../components/Realty'
 import { ContactsComponent } from '../components/Contacts'
 
 export function Prew() {
-  const dispatch = useDispatch()
   const { news } = useSelector(state => state.news)
   const { insurance } = useSelector(state => state.insurance)
   const { realties } = useSelector(state => state.realty)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchRealties())
-  }, [])
+    dispatch(fetchNews({ page: 1 }))
+    dispatch(fetchRealties({ page: 1 }))
+  },[])
+
   return (
     <>
       <PrewComponent />

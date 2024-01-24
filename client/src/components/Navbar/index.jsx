@@ -20,6 +20,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import { usePaginationClick  } from '../../hooks/usePaginationClick'
 
 export function NavbarComponent() {
   const { isAuth } = useSelector((state) => state.user)
@@ -28,9 +29,10 @@ export function NavbarComponent() {
   const location = useLocation()
   const [showOffcanvas, setShowOffcanvas] = useState(false)
   const token = localStorage.getItem('token')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   let userRole = ''
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 576)
+  const { isPaginationItemClicked, setPaginationItemClicked } = usePaginationClick()
 
   if (token) {
     const decodedToken = jwtDecode(token)
@@ -62,8 +64,27 @@ export function NavbarComponent() {
   }, [showOffcanvas])
 
   useEffect(() => {
-    window.scrollTo(0, 0) // Прокрутка вверх при изменении маршрута
-  }, [location.pathname])
+    // Дополнительный обработчик клика на пагинации
+    const handlePaginationItemClick = (event) => {
+      const isPaginationItem = event.target.closest('.page-link')
+
+      if (isPaginationItem) {
+        setPaginationItemClicked(true)
+      }
+    }
+
+    document.addEventListener('click', handlePaginationItemClick)
+
+    return () => {
+      document.removeEventListener('click', handlePaginationItemClick)
+    }
+  }, [setPaginationItemClicked])
+
+  useEffect(() => {
+    if (!isPaginationItemClicked) {
+      window.scrollTo(0, 0)
+    }
+  }, [isPaginationItemClicked, location.pathname])
 
   function logOut() {
     localStorage.removeItem('token')

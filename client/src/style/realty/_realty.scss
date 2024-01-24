@@ -1,0 +1,76 @@
+.realty {
+
+  &__wrapper {
+    display: flex;
+
+    @media screen and (max-width: 1200px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__info {
+    padding-right: 3rem;
+    text-align: justify;
+
+    @media screen and (max-width: 1200px) {
+      padding-right: 0;
+    }
+
+    @media screen and (max-width: 576px) {
+      font-size: 14px;
+      padding: 0 2rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding: 0 0.5rem;
+      font-size: 12px;
+    }
+  }
+
+  &__img {
+    width: 50%;
+    object-fit: contain;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+    @media screen and (max-width: 1400px) {
+      width: 60%;
+    }
+
+    @media screen and (max-width: 1200px) {
+      margin: 0 auto 2rem;
+      width: 70%;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 90%;
+    }
+
+    @media screen and (max-width: 576px) {
+      display: none;
+    }
+
+  }
+
+  &__title-offer {
+    margin-top: 1.5rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 576px) {
+      font-size: 16px;
+    }
+
+  }
+
+  &__img-card {
+    object-fit: cover;
+    height: 14rem;
+
+    @media screen and (max-width: 992px) {
+      height: 10rem;
+    }
+  }
+}

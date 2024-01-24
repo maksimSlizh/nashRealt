@@ -1,13 +1,20 @@
 import Pagination from 'react-bootstrap/Pagination'
 import { useNavigate } from 'react-router-dom'
+import { usePaginationClick } from '../../hooks/usePaginationClick'
 
 export function Pages({ currentPage, resource, totalCount, limit }) {
   const navigate = useNavigate()
+  const { setPaginationItemClicked } = usePaginationClick()
 
-  const totalPages = Math.ceil(totalCount / limit)
 
-  const handlePageClick = (pageNumber) => {
-    navigate(`/${resource}/${pageNumber}`)
+  const totalPages = Math.ceil(totalCount / limit);
+
+  const handlePageClick = (event, pageNumber) => {
+    event.preventDefault()
+    setPaginationItemClicked(true)
+    setTimeout(() => {
+      navigate(`/${resource}/${pageNumber}`)
+    }, 0)
   }
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
@@ -18,7 +25,7 @@ export function Pages({ currentPage, resource, totalCount, limit }) {
         <Pagination.Item
           key={page}
           active={currentPage === page}
-          onClick={() => handlePageClick(page)}
+          onClick={(event) => handlePageClick(event, page)}
         >
           {page}
         </Pagination.Item>

@@ -12,31 +12,41 @@
   @media screen and (max-width: 992px) {
     width: 12rem;
   }
-}
 
-.card-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  // background-color: rgba(255, 255, 255, 0); /* Изначально нулевая прозрачность */
-  transition:  background-color 0.7s ease; /* Добавлено свойство transition */
-  border-radius: 5px; /* Радиус скругления углов */
-  z-index: 1;
-}
+  &.wide-card {
 
-.card-link:hover::before {
-  background-color: rgba(108, 187, 248, 0.297); /* Появление фона с полупрозрачностью и цветом $yellow-400 */
-}
+    @media screen and (max-width: 1400px) {
+      width: 80%;
+    }
 
-.card-link:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
-}
+    @media screen and (max-width: 576px) {
+      width: 70%;
+    }
+  }
 
-.card-link__delete {
-  position: relative;
-  z-index: 2;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: background-color 0.7s ease;
+    border-radius: 5px;
+    z-index: 1;
+  }
+
+  &:hover::before {
+    background-color: rgba(108, 187, 248, 0.297);
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.146);
+  }
+
+  &__delete {
+    position: relative;
+    z-index: 2;
+  }
 }

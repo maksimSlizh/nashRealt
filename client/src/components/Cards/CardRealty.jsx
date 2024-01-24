@@ -41,14 +41,15 @@ export function CardRealty(props) {
       return (
         <NavLink
         to={`${REALTY_ROUTE}/selected/${id}`}
-        className="card-link" >
-          <Card className="custom-card">
+        className="card-link wide-card" >
+          <Card className="custom-card__big">
             <Card.Img
               variant="top"
-              src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl} style={{ height: '10rem', objectFit: 'cover' }} />
+              src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl}
+              className='realty__img-card' />
             <Card.Body>
-              <Card.Title>{t(props[titleKey])}</Card.Title>
-              <Card.Text>
+              <Card.Title className="custom-card__title">{t(props[titleKey])}</Card.Title>
+              <Card.Text className="custom-card__text">
                 {price}
               </Card.Text>
               {isAuth && userRole === 'ADMIN' &&
