@@ -12,40 +12,39 @@ export function CardOneRealty(props) {
   const descriptionKey = generateTranslationKey('description', i18n.language)
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleSelect = (selectedIndex, e) => {
-    setActiveIndex(selectedIndex);
-  };
+  const handleSelect = (selectedIndex) => {
+    setActiveIndex(selectedIndex)
+  }
 
   const nextSlide = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % (realty_images.length || 1));
-  };
+    setActiveIndex((prevIndex) => (prevIndex + 1) % (realty_images.length || 1))
+  }
 
   const prevSlide = () => {
-    setActiveIndex((prevIndex) => (prevIndex - 1 + (realty_images.length || 1)) % (realty_images.length || 1));
+    setActiveIndex((prevIndex) => (prevIndex - 1 + (realty_images.length || 1)) % (realty_images.length || 1))
   };
 
   return (
-    <section className='mt-5'>
+    <section className='one-realty'>
       <div className="container">
-        <h2>{t(props[titleKey])}</h2>
-        <div className='mt-4 d-flex justify-content-between'>
-          <div className='w-50 d-flex flex-column mt-auto mb-auto'>
+        <h2 className='one-realty__title'>{t(props[titleKey])}</h2>
+        <div className='one-realty__content'>
+          <div className='one-realty__item'>
             <p>{t('realty.addres')} {address}</p>
-            <p>{t('realty.price')} {price} ₽</p>
+            <p>{t('realty.price')} {price} zł</p>
             <p>{t('realty.area')} {area} м<sup>2</sup></p>
             <p>{t('realty.rooms')} {rooms}</p>
             <p>{t('realty.floor')} {floor}</p>
           </div>
-          <div className='w-50'>
+          <div className='one-realty__item'>
             {realty_images && realty_images.length > 0 && (
               <Carousel activeIndex={activeIndex} onSelect={handleSelect} controls={false}>
                 {realty_images.map((image, index) => (
                   <Carousel.Item key={index}>
                     <img
-                      className="d-block w-100"
+                      className="d-block w-100 one-realty__image"
                       src={import.meta.env.VITE_REACT_APP_API_URL + image.imageUrl}
                       alt={`Image ${index + 1}`}
-                      style={{ objectFit: 'cover', height: '400px' }}
                     />
                   </Carousel.Item>
                 ))}
@@ -63,9 +62,9 @@ export function CardOneRealty(props) {
             )}
           </div>
         </div>
-        <hr className='mt-2' />
-        <p className='pt-2' style={{ whiteSpace: 'pre-line', wordWrap: 'break-word', textAlign: 'justify' }}>{t(props[descriptionKey])}</p>
+        <hr className='pt-2' />
+        <p className='card-one__text pt-2' >{t(props[descriptionKey])}</p>
       </div>
     </section>
-  );
+  )
 }

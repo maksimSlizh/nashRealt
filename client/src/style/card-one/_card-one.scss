@@ -1,0 +1,62 @@
+.card-one {
+
+  &__title {
+    padding: 3rem 2rem 0;
+    text-align: center;
+
+    @media screen and (max-width: 576px) {
+      font-size: 24px;
+    }
+  }
+
+  &__image-container {
+    margin: 3rem auto 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 1400px;
+    object-fit: cover;
+    max-height: 60vh;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    border-radius: 10px;
+
+    @media screen and (max-width: 1200px) {
+      max-width: 1200px;
+      max-height: 50vh;
+    }
+
+    @media screen and (max-width: 992px) {
+      max-width: 900px;
+    }
+
+    @media screen and (max-width: 768px) {
+      max-width: 700px;
+    }
+
+    @media screen and (max-width: 576px) {
+      max-width: 500px;
+    }
+
+    @media screen and (max-width: 400px) {
+      max-width: 370px;
+    }
+
+    @media screen and (max-width: 320px) {
+      max-width: 300px;
+    }
+  }
+
+  &__text {
+    padding: 0 2rem 3rem;
+    white-space: pre-line;
+    text-align: justify;
+    word-wrap: break-word;
+
+    @media screen and (max-width: 576px) {
+      font-size: 14px;
+    }
+  }
+}

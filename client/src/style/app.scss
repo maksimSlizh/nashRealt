@@ -1,18 +1,29 @@
 @import "bootstrap/scss/bootstrap";
 
-@import "./navbar/navbar.scss";
-@import "./icon-link/icon-link.scss";
-@import "./card-grid/card-grid.scss";
-@import "./slider/slider";
-@import "./insurance/insurance";
-@import "./card-link/card-link";
-@import "./auth-form/auth-form";
-@import "./locales-link/locales-link";
+// global
+@import "./global/global.scss";
+
+// custom
+@import "./custom-navbar/custom-navbar";
 @import "./custom-card/custom-card";
 @import "./custom-button/custom-button";
-@import "./title-page/title-page";
+
+// components
+@import "./insurance/insurance";
 @import "./realty/realty";
 @import "./contacts/contacts";
+@import "./auth-form/auth-form";
+
+// cards
+@import "./card-grid/card-grid.scss";
+@import "./card-one/card-one";
+@import "./one-realty/one-realty";
+
+// links
+@import "./icon-link/icon-link.scss";
+@import "./card-link/card-link";
+@import "./locales-link/locales-link";
+@import "./hover-effect/hover-effect";
 
 // PREW Page
 @import "./prew/prew";
@@ -22,13 +33,6 @@
 @import "./prew-realty/prew-realty";
 @import "./prew-contacts/prew-contacts";
 
-body {
-  font-family: "Roboto", sans-serif;
-}
-
-.hover-effect {
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
+// other
+@import "./slider/slider";
+@import "./title-page/title-page";

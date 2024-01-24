@@ -1,0 +1,56 @@
+.one-realty {
+  &__title {
+    padding: 3rem 2rem 0;
+
+    @media screen and (max-width: 576px) {
+      font-size: 24px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    & hr {
+      display: none;
+    }
+  }
+
+  &__content {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__item {
+    width: 50%;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    &:first-child {
+      display: flex;
+      flex-direction: column;
+      margin: auto 2rem;
+
+      @media screen and (max-width: 768px) {
+        margin: 2rem 0;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.276);
+        background-color: $gray-100;
+      }
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+    height: 400px;
+
+    @media screen and (max-width: 576px) {
+      height: 300px;
+    }
+  }
+}
