@@ -18,7 +18,7 @@ export function CardOne(props) {
             style={{ width: '60%', }}>
             <Image
               src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
-              alt=""
+              alt="Card image"
               className='card-one__image'
             />
           </div>

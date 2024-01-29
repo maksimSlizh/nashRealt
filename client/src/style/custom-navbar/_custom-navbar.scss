@@ -18,16 +18,23 @@
     @media screen and (max-width: 1200px) {
       font-size: 14px;
     }
-
     &:hover {
-      color: $yellow-600;
-      border-bottom: 2px solid $yellow-600;
+      color: $yellow-700;
+      border-bottom: 2px solid $yellow-700;
+
+      @media screen and (max-width: 992px) {
+      border-bottom: none;
+      }
     }
   }
 
   .nav-link.active,
   .nav-link.show {
-    color: $yellow-600;
-    border-bottom: 2px solid $yellow-600;
+    color: $yellow-700;
+    border-bottom: 2px solid $yellow-700;
+
+    @media screen and (max-width: 992px) {
+      border-bottom: none;
+    }
   }
 }

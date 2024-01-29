@@ -24,7 +24,7 @@ export function App() {
         dispatch(setUser(data))
         dispatch(setIsAuth(true))
       } catch (error) {
-        console.error(error)
+        // console.error(error)
       } finally {
         setLoading(false)
       }

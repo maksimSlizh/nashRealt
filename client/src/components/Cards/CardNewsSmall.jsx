@@ -17,7 +17,9 @@ export function CardNewsSmall(props) {
       <Card className="custom-card">
         <Card.Img
           variant="top"
-          src={import.meta.env.VITE_REACT_APP_API_URL + props.img} className='custom-card__img' />
+          src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
+          className='custom-card__img'
+          alt='news s img' />
         <Card.Body>
           <Card.Title
           className='custom-card__title'>{t(props[titleKey])}</Card.Title>

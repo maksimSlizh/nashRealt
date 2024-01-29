@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { generateTranslationKey } from '../../utils/i18nUtils'
 import { REALTY_ROUTE } from '../../utils/consts'
 import { Card } from 'react-bootstrap'
-import noImage from '../../assets/img/noImage.jpg'
+import noImage from '../../assets/img/noImage.webp'
 
 export function CardRealty(props) {
   const { realty_images, price, id } = props
@@ -46,6 +46,7 @@ export function CardRealty(props) {
             <Card.Img
               variant="top"
               src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl}
+              alt="Картинка недвижимости"
               className='realty__img-card' />
             <Card.Body>
               <Card.Title className="custom-card__title">{t(props[titleKey])}</Card.Title>

@@ -1,5 +1,28 @@
 .prew-link {
+  position: relative;
   text-decoration: none;
+  color: $blue-500;
+  margin: auto 0;
+  overflow: hidden; /* Hide overflowing content */
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, $blue-700, $blue-700);
+    transition: width 0.3s ease, background-color 0.3s ease; /* Animate the width and background-color */
+  }
+
+  &:hover {
+    color: $blue-700;
+  }
+
+  &:hover::before {
+    width: 100%; /* Expand the width on hover */
+  }
 
   @media screen and (max-width: 992px) {
     font-size: 16px;

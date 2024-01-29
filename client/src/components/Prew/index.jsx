@@ -1,5 +1,5 @@
-import logo from '../../assets/img/logo.jpg'
-import unilink from '../../assets/img/unilnk.jpg'
+import logo from '../../assets/img/logo.webp'
+import unilink from '../../assets/img/unilnk.webp'
 
 export function PrewComponent() {
   return (
@@ -9,15 +9,19 @@ export function PrewComponent() {
           <div className='prew__info'>
             <img src={logo}
             className='prew__logo'
-            alt="" />
+            alt="NashRealt"
+            loading='lazy' />
             <h2 className='prew__title'>
               BIURO NEIRUCHOMOŚCI UBEZPIECZENI
             </h2>
           </div>
 
 
-          <img src={unilink}
-          className='prew__partner' alt="" />
+          <img
+          src={unilink}
+          className='prew__partner'
+          alt="Unilink"
+          loading='lazy' />
         </div>
       </div>
     </section>

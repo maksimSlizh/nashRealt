@@ -6,8 +6,8 @@ import { fetchInsurance } from '../redux/insuranceSlice'
 import { jwtDecode } from 'jwt-decode'
 import { useTranslation } from 'react-i18next'
 import { generateTranslationKey } from '../utils/i18nUtils'
-import logo from '../assets/img/logo.jpg'
-import unilink from '../assets/img/unilnk.jpg'
+import logo from '../assets/img/logo.webp'
+import unilink from '../assets/img/unilnk.webp'
 import { INSURANCES_ROUTE } from '../utils/consts'
 
 

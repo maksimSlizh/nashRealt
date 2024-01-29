@@ -5,7 +5,7 @@ import { CardRealty } from '../components/Cards/CardRealty'
 import { fetchRealties } from '../redux/realtySlice'
 import { Pages } from '../components/Pages'
 import { useParams } from 'react-router-dom'
-import agensy from '../assets/img/agensy.jpg'
+import agensy from '../assets/img/agensy.webp'
 
 export function Realty() {
 

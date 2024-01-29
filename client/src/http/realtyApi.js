@@ -17,7 +17,6 @@ export const requestOneRealty = async (id) => {
 
 export const deleteRealty = async (id) => {
   const { data } = await $authHost.delete(`api/realty/${id}`)
-  console.log(data)
   return data
 }
 

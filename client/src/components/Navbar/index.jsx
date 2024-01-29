@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode'
 import { setIsAuth, setUser } from '../../redux/userSlice'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from '../LanguageSwitcher'
-import logo from '../../assets/img/logo.jpg'
+import logo from '../../assets/img/logo.webp'
 import {
   CONTACTS_ROUTE,
   INSURANCES_ROUTE,
@@ -34,9 +34,9 @@ export function NavbarComponent() {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 576)
   const { isPaginationItemClicked, setPaginationItemClicked } = usePaginationClick()
 
-  if (token) {
-    const decodedToken = jwtDecode(token)
-    userRole = decodedToken.role
+  if (token !== null && token !== undefined) {
+    const decodedToken = jwtDecode(token);
+    userRole = decodedToken.role;
   }
 
   const closeOffcanvas = () => {

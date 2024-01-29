@@ -2,17 +2,17 @@ const sequelize = require('../db')
 const {DataTypes} = require('sequelize')
 
 const User = sequelize.define('user', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  email: {type: DataTypes.STRING, unique: true},
-  password: {type: DataTypes.STRING},
-  // isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
-  // activationLink: {type: DataTypes.STRING},
-  role: {type: DataTypes.STRING, defaultValue: 'USER'},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  email: { type: DataTypes.STRING, unique: true },
+  password: { type: DataTypes.STRING },
+  // isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
+  // activationLink: { type: DataTypes.STRING },
+  role: { type: DataTypes.STRING, defaultValue: 'USER' },
 })
 
 // const Token = sequelize.define('token', {
-//   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-//   refreshToken: {type: DataTypes.STRING, unique: true},
+//   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+//   refreshToken: { type: DataTypes.STRING, unique: true },
 // })
 
 const News = sequelize.define('news', {
@@ -70,12 +70,12 @@ User.hasMany(News, { foreignKey: 'userId' });
 Insurance.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Insurance, { foreignKey: 'userId' });
 // Token.belongsTo(User);
-// User.hasMany(Token);
+// User.hasOne(Token);
 
 module.exports = {
   User,
   News,
   Realty,
   RealtyImage,
-  Insurance
+  Insurance,
 }
