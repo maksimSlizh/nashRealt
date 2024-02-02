@@ -1,16 +1,19 @@
+import { useTranslation } from 'react-i18next'
+
 export function About() {
+  const { t } = useTranslation()
+
   return (
     <section className='mt-4'>
       <div className="container">
-        <h1>О компании</h1>
+        <h1 className='title-page'>{t('about.title')}</h1>
         <div className='mt-5'>
-          <p>
-            Всем привет.<br />
-            Меня зовут Каролина Стасюк я основатель и руководитель фирмы "NashRealt".<br />
-            В июле 22 года получила лицензию на оказание риелторских услуг в Польше.  Наша компания помогает арендовать, а главное покупать  недвижимость в Труймясте.<br /><br />
-            Второе направление моей фирмы – это страхование.<br />
-            Являясь партнером компании Unilink, мы подбираем и оформляем страховые полисы от разных кампаний наиболее выгодные для наших клиентов.<br /><br />
-            Будем рады видеть Вас в нашем офисе в Гданьске
+          <p className='card-one__text'>
+            {t('about.greeting')}<br />
+            {t('about.intro')}<br />
+            {t('about.licenseInfo')}<br /><br />
+            {t('about.insuranceInfo')}<br />
+            {t('about.officeLocation')}
           </p>
         </div>
       </div>
