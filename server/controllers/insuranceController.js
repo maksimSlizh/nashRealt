@@ -30,23 +30,20 @@ class InsuranceController {
     }
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     let { limit, page } = req.query;
     page = page || 1;
     limit = limit || 8;
     const offset = (page - 1) * limit;
-
     try {
         const insuranceAll = await Insurance.findAndCountAll({
-            limit,
+            limit: parseInt(limit, 10),
             offset,
             order: [['createdAt', 'DESC']] // Сортировка по дате создания в обратном порядке
         });
-
         return res.json(insuranceAll);
     } catch (error) {
-        // Обработка ошибок
-        return res.status(500).json({ error: 'Internal Server Error' });
+        next(ApiError.internalServerError(error.message));
     }
 }
 

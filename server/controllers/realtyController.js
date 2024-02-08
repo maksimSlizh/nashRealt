@@ -57,17 +57,17 @@ class RealtyController {
     limit = limit || 4;
     const offset = (page - 1) * limit;
     try {
-      const totalCount = await Realty.count()
-      const realties = await Realty.findAll({
-        limit,
-        offset,
-        include: [RealtyImage]
-      });
-      return res.json({totalCount, realties});
-    } catch (e) {
-      next(ApiError.internalServerError(e.message));
+        const totalCount = await Realty.count();
+        const realties = await Realty.findAll({
+            limit: parseInt(limit, 10),
+            offset,
+            include: [RealtyImage]
+        });
+        return res.json({totalCount, realties});
+    } catch (error) {
+        next(ApiError.internalServerError(error.message));
     }
-  }
+}
 
   async getOne(req, res, next) {
     try {
