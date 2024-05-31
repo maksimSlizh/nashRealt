@@ -30,8 +30,16 @@ class UserController {
       const user = await User.create({ email, role, password: hashPassword });
       const token = generateJwt(user._id, user.email, user.role);
 
-      return res.json({ token });
+      res.cookie('token', token, {
+        httpOnly: false,
+        secure: false, // На production установите true
+        sameSite: 'strict',
+        maxAge: 12 * 60 * 60 * 1000, // 12 часов
+      });
+
+      return res.status(200).json({ message: 'Регистрация успешна', token });
     } catch (error) {
+      console.log('Ошибка при регистрации:', error);
       next(ApiError.internal(error.message));
     }
   }
@@ -58,7 +66,14 @@ class UserController {
 
       const token = generateJwt(user._id, user.email, user.role);
 
-      return res.json({ token, role: user.role });
+      res.cookie('token', token, {
+        httpOnly: false,
+        secure: false, // На production установите true
+        sameSite: 'strict',
+        maxAge: 12 * 60 * 60 * 1000, // 12 часов
+      });
+
+      return res.status(200).json({ role: user.role, message: 'Вход успешен' });
     } catch (error) {
       next(ApiError.internal(error.message));
     }
@@ -68,7 +83,15 @@ class UserController {
     try {
       const { _id, email, role } = req.user;
       const token = generateJwt(_id, email, role);
-      return res.json({ id: _id, email, role, token });
+
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: false, // На production установите true
+        sameSite: 'strict',
+        maxAge: 12 * 60 * 60 * 1000, // 12 часов
+      });
+
+      return res.status(200).json({ id: _id, email, role, message: 'Токен проверен и обновлен' });
     } catch (error) {
       next(ApiError.internal(error.message));
     }
