@@ -12,12 +12,12 @@ export function CardNewsSmall(props) {
 
   return (
     <NavLink
-      to={`${NEWS_ROUTE}/selected/${props.id}`}
+      to={`${NEWS_ROUTE}/selected/${props._id}`}
       className="card-link" >
       <Card className="custom-card">
         <Card.Img
           variant="top"
-          src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
+          src={props.img}
           className='custom-card__img'
           alt='news s img' />
         <Card.Body>

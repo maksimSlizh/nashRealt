@@ -12,7 +12,7 @@ export function PrewComponent() {
             alt="NashRealt"
             loading='lazy' />
             <h2 className='prew__title'>
-              BIURO NEIRUCHOMOŚCI UBEZPIECZENI
+              BIURO NEIRUCHOMOŚCI UBEZPIECZENIE
             </h2>
           </div>
 

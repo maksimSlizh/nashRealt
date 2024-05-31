@@ -35,7 +35,7 @@ export const insuranceSlice = createSlice({
       })
       .addCase(fetchInsurance.fulfilled, (state, action) => {
         state.loading = false
-        state.insurance = action.payload.rows
+        state.insurance = action.payload
         state.totalCount = action.payload.count
       })
       .addCase(fetchInsurance.rejected, (state, action) => {

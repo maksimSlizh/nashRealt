@@ -33,7 +33,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchNews.fulfilled, (state, action) => {
         state.loading = false
-        state.news = action.payload.rows
+        state.news = action.payload
         state.totalCount = action.payload.count
         state.limit = action.meta.arg.limit || initialState.limit;
       })

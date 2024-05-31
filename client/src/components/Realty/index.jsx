@@ -5,7 +5,7 @@ import { REALTY_ROUTE } from '../../utils/consts'
 import { CardRealtySmall } from '../Cards/CardRealtySmall'
 import {calculateItemsToDisplay } from '../../helpers'
 
-export function RealtyComponent({ data: realties }) {
+export function RealtyComponent({ data: realties = [] }) {
   const { t } = useTranslation()
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -36,7 +36,7 @@ export function RealtyComponent({ data: realties }) {
         <p className='prew-realty__text'>{t('realty.prewfirst')}
           <b> {t('realty.prewmiddle')} </b> {t('realty.prewsecond')}</p>
         <div className='prew-news__list'>
-          {realties.slice(0, itemsToDisplay).map(item => <CardRealtySmall key={item.id} {...item} />)}
+          {realties.slice(0, itemsToDisplay).map(item => <CardRealtySmall key={item._id} {...item} />)}
         </div>
       </div>
     </section>

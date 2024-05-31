@@ -7,7 +7,7 @@ import { Pages } from '../components/Pages'
 import { useParams } from 'react-router-dom'
 
 export function News() {
-  const { news, totalCount, limit } = useSelector((state) => state.news)
+  const { news = [], totalCount, limit } = useSelector((state) => state.news)
   const { page } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -42,7 +42,7 @@ export function News() {
           <h1 className='title-page'>{t('news.title')}</h1>
           <div className='mt-4 mb-5 card-grid'>
             {news.map(el => {
-              return <CardNews key={el.id} {...el} />
+              return <CardNews key={el._id} {...el} />
             })}
           </div>
         </div>

@@ -33,10 +33,10 @@ export function CardNews(props) {
   }
 
   return (
-    <NavLink to={NEWS_ROUTE + '/selected' + '/' + props.id} className="card-link wide-card">
+    <NavLink to={NEWS_ROUTE + '/selected' + '/' + props._id} className="card-link wide-card">
       <div className="card custom-card__big">
         <img
-          src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
+          src={props.img}
           className="card-img-top"
           alt="Картинка"
           style={{ height: '10rem', objectFit: 'cover' }}
@@ -46,7 +46,7 @@ export function CardNews(props) {
           <p className="card-text custom-card__text">{t(props[descriptionKey])}</p>
           <div className='mt-auto d-flex'>
             {isAuth && userRole === 'ADMIN' && ( // Проверка на аутентификацию и роль "admin"
-              <button className="btn btn-danger card-link__delete" onClick={() => handleDelete(props.id)}>
+              <button className="btn btn-danger card-link__delete" onClick={() => handleDelete(props._id)}>
                 Delete
               </button>
             )}

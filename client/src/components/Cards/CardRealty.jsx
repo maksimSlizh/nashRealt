@@ -9,8 +9,7 @@ import { REALTY_ROUTE } from '../../utils/consts'
 import { Card } from 'react-bootstrap'
 import noImage from '../../assets/img/noImage.webp'
 
-export function CardRealty(props) {
-  const { realty_images, price, id } = props
+export function CardRealty(props = []) {
   const { isAuth } = useSelector(state => state.user)
   const dispatch = useDispatch()
 
@@ -36,27 +35,27 @@ export function CardRealty(props) {
   }
 
   const renderCard = () => {
-    if (realty_images && realty_images.length > 0) {
-      const firstImage = realty_images[0];
+    if (props.images && props.images.length > 0) {
+      const firstImage = props.images[0];
       return (
         <NavLink
-        to={`${REALTY_ROUTE}/selected/${id}`}
+        to={`${REALTY_ROUTE}/selected/${props._id}`}
         className="card-link wide-card" >
           <Card className="custom-card__big">
             <Card.Img
               variant="top"
-              src={import.meta.env.VITE_REACT_APP_API_URL + firstImage.imageUrl}
+              src={firstImage}
               alt="Картинка недвижимости"
               className='realty__img-card' />
             <Card.Body>
               <Card.Title className="custom-card__title">{t(props[titleKey])}</Card.Title>
               <Card.Text className="custom-card__text">
-                {price}
+                {props.price}
               </Card.Text>
               {isAuth && userRole === 'ADMIN' &&
               <button
               className='btn btn-danger card-link__delete'
-              onClick={() => handleDelete(id)}>Удалить</button>}
+              onClick={() => handleDelete(props._id)}>Удалить</button>}
             </Card.Body>
           </Card>
         </NavLink>
@@ -64,7 +63,7 @@ export function CardRealty(props) {
     }
     else {
       return (
-        <NavLink to={`${REALTY_ROUTE}/selected/${id}`} style={{ textDecoration: 'none' }} >
+        <NavLink to={`${REALTY_ROUTE}/selected/${props._id}`} style={{ textDecoration: 'none' }} >
           <Card className="mt-5" style={{ width: '18rem', height: '18rem' }}>
             <Card.Img
               variant="top"
@@ -72,9 +71,9 @@ export function CardRealty(props) {
             <Card.Body>
               <Card.Title>{t(props[titleKey])}</Card.Title>
               <Card.Text>
-                {price}
+                {props.price}
               </Card.Text>
-              {isAuth && userRole === 'ADMIN' && <button className='btn btn-danger' onClick={() => handleDelete(id)}>Удалить</button>}
+              {isAuth && userRole === 'ADMIN' && <button className='btn btn-danger' onClick={() => handleDelete(props._id)}>Удалить</button>}
             </Card.Body>
           </Card>
         </NavLink>

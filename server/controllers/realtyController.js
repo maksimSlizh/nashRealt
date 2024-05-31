@@ -1,13 +1,9 @@
-const { Realty, RealtyImage } = require('../models/models');
+const { Realty} = require('../models/models');
 const ApiError = require('../error/ApiError');
-const uuid = require('uuid');
-const fs = require('fs');
-const path = require('path');
 
 class RealtyController {
   async create(req, res, next) {
     try {
-
       const {
         title_ru,
         title_pl,
@@ -18,95 +14,81 @@ class RealtyController {
         rooms,
         floor,
         address,
-        deposit } = req.body;
-      const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images] // предполагается, что изображения приходят в поле "images"
+        deposit,
+        images
+      } = req.body;
 
-      const realty = await Realty.create(
-        {
-          title_ru,
-          title_pl,
-          description_ru,
-          description_pl,
-          price,
-          area,
-          rooms,
-          floor,
-          address,
-          deposit });
-      let realtyImages = [];
-      if (images.length > 0) {
-        realtyImages = await Promise.all(images.map(async (image) => {
-          const fileName = uuid.v4() + '.jpg';
-          image.mv(path.resolve(__dirname, '..', 'static', fileName));
-          const createdImage = await RealtyImage.create({ imageUrl: fileName });
-          // Установка связи между изображением и недвижимостью
-          await createdImage.setRealty(realty);
-          return createdImage;
-        }));
-      }
+      console.log(title_ru, title_pl, description_ru, description_pl, price, area, rooms, floor, address, deposit, images);
+
+      const realty = await Realty.create({
+        title_ru,
+        title_pl,
+        description_ru,
+        description_pl,
+        price,
+        area,
+        rooms,
+        floor,
+        address,
+        deposit,
+        images
+      });
 
       return res.json(realty);
-    } catch (e) {
-      next(ApiError.badRequest(e.message));
+    } catch (error) {
+      console.log(error);
+      next(ApiError.badRequest(error.message));
     }
   }
 
   async getAll(req, res, next) {
     let { limit, page } = req.query;
     page = page || 1;
-    limit = limit || 4;
-    const offset = (page - 1) * limit;
+    limit = limit || 10;
+    const skip = (page - 1) * limit;
+
     try {
-        const totalCount = await Realty.count();
-        const realties = await Realty.findAll({
-            limit: parseInt(limit, 10),
-            offset,
-            include: [RealtyImage]
-        });
-        return res.json({totalCount, realties});
+      const totalCount = await Realty.countDocuments();
+      const realties = await Realty.find()
+        .limit(parseInt(limit, 10))
+        .skip(skip);
+
+
+      return res.json({ totalCount, realties }); // Возвращаем общее количество объектов и массив объектов с их изображениями
     } catch (error) {
-        next(ApiError.internalServerError(error.message));
+      next(ApiError.internal(error.message));
     }
-}
+  }
 
   async getOne(req, res, next) {
     try {
       const { id } = req.params;
-      const realty = await Realty.findByPk(id, { include: [RealtyImage] });
+      const realty = await Realty.findById(id);
 
       if (!realty) {
         return next(ApiError.notFound('Недвижимость не найдена'));
       }
 
-      return res.json(realty);
-    } catch (e) {
-      next(ApiError.internalServerError(e.message));
+      return res.json({ realty});
+    } catch (error) {
+      next(ApiError.internal(error.message));
     }
   }
 
   async deleteOne(req, res, next) {
     try {
       const { id } = req.params;
-      const realty = await Realty.findByPk(id);
+      const realty = await Realty.findById(id);
 
       if (!realty) {
         return next(ApiError.notFound('Недвижимость не найдена'));
       }
 
-      const realtyImages = await RealtyImage.findAll({ where: { realtyId: id } });
-      realtyImages.forEach(async (image) => {
-        const filePath = path.resolve(__dirname, '..', 'static', image.imageUrl);
-        if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
-        }
-        await image.destroy();
-      });
-
-      await realty.destroy();
+      await Realty.deleteOne({ _id: id });
 
       return res.json({ message: 'Недвижимость успешно удалена' });
-    } catch (e) {
-      next(ApiError.internalServerError(e.message));
+    } catch (error) {
+      next(ApiError.internal(error.message));
     }
   }
 }

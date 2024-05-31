@@ -5,7 +5,7 @@ import { CardNewsSmall } from '../Cards/CardNewsSmall'
 import { NEWS_ROUTE } from '../../utils/consts'
 import {calculateItemsToDisplay } from '../../helpers'
 
-export function NewsComponent({ data: news }) {
+export function NewsComponent({ data: news = [] }) {
   const { t } = useTranslation()
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -35,7 +35,7 @@ export function NewsComponent({ data: news }) {
           className='prew-link'>{t('prew.newslink')}</NavLink>
         </div>
         <div className='prew-news__list bg-white'>
-        {news.slice(0, itemsToDisplay).map(item => <CardNewsSmall key={item.id} {...item} />)}
+        {news.slice(0, itemsToDisplay).map(item => <CardNewsSmall key={item._id} {...item} />)}
         </div>
       </div>
     </section>

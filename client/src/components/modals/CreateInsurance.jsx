@@ -12,9 +12,7 @@ export function CreateInsurance({ show, onHide }) {
   const [description, setDescription] = useState('')
   const [descriptionPl, setDescriptionPl] = useState('')
   const [image, setImage] = useState('')
-  const [imagePreviewUrl, setImagePreviewUrl] = useState('')
   const [icon, setIcon] = useState('')
-  const [iconPreviewUrl, setIconPreviewUrl] = useState('')
 
 
   function changeTitle(e) {
@@ -27,15 +25,11 @@ export function CreateInsurance({ show, onHide }) {
     setDescription(e.target.value)
   }
   function changeImage(e) {
-    const file = e.target.files[0]
-    setImagePreviewUrl(URL.createObjectURL(file))
-    setImage(file)
+    setImage(e.target.value)
   }
 
   function changeIcon(e) {
-    const file = e.target.files[0]
-    setIconPreviewUrl(URL.createObjectURL(file))
-    setIcon(file)
+    setIcon(e.target.value)
   }
 
   const submitInsurance = (e) => {
@@ -62,9 +56,7 @@ export function CreateInsurance({ show, onHide }) {
       setDescription('')
       setDescriptionPl('')
       setImage('')
-      setImagePreviewUrl('')
       setIcon('')
-      setIconPreviewUrl('')
       onHide()
     })
   }
@@ -132,28 +124,17 @@ export function CreateInsurance({ show, onHide }) {
           />
           <Form.Label>Choose Image:</Form.Label>
           <Form.Control
-            type='file'
+            value={image}
+            as="textarea"
             onChange={changeImage}
           />
           <Form.Label>Choose Icon:</Form.Label>
           <Form.Control
-            type='file'
+            value={icon}
+            as="textarea"
             onChange={changeIcon}
             description="Select an icon for your insurance"
           />
-          {imagePreviewUrl && (
-            <Image
-              src={imagePreviewUrl}
-              width={300}
-              height={200} />
-          )}
-          {iconPreviewUrl && (
-            <Image
-              src={iconPreviewUrl}
-              width={100}
-              height={100}
-            />
-          )}
         </Form>
       </Modal.Body>
       <Modal.Footer>

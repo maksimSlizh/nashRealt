@@ -11,12 +11,12 @@ export function CardInsuranceSmall(props) {
   const titleKey = generateTranslationKey('title', i18n.language)
   return (
     <NavLink
-    to={`${INSURANCES_ROUTE}/selected/${props.id}`}
+    to={`${INSURANCES_ROUTE}/selected/${props._id}`}
     className="card-link">
       <Card className="custom-card__insurance" >
         <Card.Img
           variant="top"
-          src={import.meta.env.VITE_REACT_APP_API_URL + props.img}
+          src={props.img}
           className='custom-card__img'
           alt='insurance img'
         />

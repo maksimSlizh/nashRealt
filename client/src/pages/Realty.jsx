@@ -9,7 +9,7 @@ import agensy from '../assets/img/realtyImg.webp'
 
 export function Realty() {
 
-  const { realties, totalCount, limit } = useSelector(state => state.realty)
+  const { realties = [], totalCount, limit } = useSelector(state => state.realty)
   const { page } = useParams()
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -51,7 +51,7 @@ export function Realty() {
         <hr />
         <div className='mt-4 mb-5 card-grid__realty'>
         {realties.map(el => {
-          return <CardRealty key={el.id} {...el} />
+          return <CardRealty key={el._id} {...el} />
         })}
         </div>
         <Pages currentPage={parseInt(page || 1)} totalCount={totalCount} limit={limit} resource={'realty'} />

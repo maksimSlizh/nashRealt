@@ -12,7 +12,7 @@ import { INSURANCES_ROUTE } from '../utils/consts'
 
 
 export function Insurances() {
-  const { insurance } = useSelector((state) => state.insurance)
+  const { insurance = [] } = useSelector((state) => state.insurance)
   const { isAuth } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
@@ -28,7 +28,6 @@ export function Insurances() {
   }
 
   const handleDelete = async (id) => {
-    console.log(id)
     try {
       await deleteInsurance(id)
       dispatch(fetchInsurance({ page: 1 }))
@@ -40,20 +39,20 @@ export function Insurances() {
   function renderInsurance() {
     return insurance.map((item, index) => {
       return (
-        <NavLink to={`${INSURANCES_ROUTE}/selected/${item.id}`} key={index} className='insurance__link'>
+        <NavLink to={`${INSURANCES_ROUTE}/selected/${item._id}`} key={index} className='insurance__link'>
           <div className='insurance__item' key={index}>
             <h5 className='insurance__text'>{t(item[titleKey])}
             </h5>
             <div className='mt-auto pe-3 pb-3'>
               <Image
-                src={import.meta.env.VITE_REACT_APP_API_URL + item.icon}
+                src={item.icon}
                 width={100}
                 className='insurance__img'
                 alt="Нет Картинки" />
             </div>
           </div>
           {isAuth && userRole === 'ADMIN' && (
-            <button key={`f${(+new Date).toString(16)} + ${Math.random()}`} className='btn btn-danger mt-5 card-link__delete' onClick={() => handleDelete(item.id)}>X</button>
+            <button key={`f${(+new Date).toString(16)} + ${Math.random()}`} className='btn btn-danger mt-5 card-link__delete' onClick={() => handleDelete(item._id)}>X</button>
           )}
         </NavLink>
       )

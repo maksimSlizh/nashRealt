@@ -7,7 +7,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 import { calculateItemsToDisplayInsurance } from "../../helpers"
 
-export function InsuranceComponent({ data: insurance }) {
+export function InsuranceComponent({ data: insurance = [] }) {
   const { t } = useTranslation()
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const cardsPerSlide = calculateItemsToDisplayInsurance(windowWidth)
@@ -57,6 +57,7 @@ export function InsuranceComponent({ data: insurance }) {
             {t('insurance.readall')}
           </NavLink>
         </div>
+        <p className='prew-realty__text'>{t('insurance.text')}<br />{t('insurance.text2')}</p>
 
         <div className="bg-white prew-insurance__body">
           {useBootstrapCarousel ? (
@@ -70,7 +71,7 @@ export function InsuranceComponent({ data: insurance }) {
                   indicators={false}
                   controls={false}>
                   {insurance.map((item) => (
-                    <Carousel.Item key={item.id} className="mt-5">
+                    <Carousel.Item key={item._id} className="mt-5">
                       <div className="slider__container">
                         <CardInsuranceSmall {...item} />
                       </div>
@@ -130,7 +131,7 @@ export function InsuranceComponent({ data: insurance }) {
                     <Carousel.Item key={index} className='mt-5'>
                       <div className="slider__container" >
                         {group.map((item) => (
-                          <CardInsuranceSmall key={item.id} {...item} />
+                          <CardInsuranceSmall key={item._id} {...item} />
                         ))}
                       </div>
                     </Carousel.Item>

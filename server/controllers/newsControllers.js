@@ -1,16 +1,11 @@
-const { News } = require('../models/models')
-const ApiError = require('../error/ApiError')
-const uuid = require('uuid')
-const fs = require('fs')
-const path = require('path')
+const { News } = require('../models/models');
+const ApiError = require('../error/ApiError');
 
 class NewsController {
   async create(req, res, next) {
     try {
-      const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId } = req.body;
-      const { img } = req.files;
-      const fileName = uuid.v4() + '.jpg';
-      img.mv(path.resolve(__dirname, '..', 'static', fileName));
+      const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId, img } = req.body;
+
 
       const news = await News.create({
         title_ru,
@@ -19,74 +14,62 @@ class NewsController {
         text_pl,
         description_ru,
         description_pl,
-        img: fileName,
+        img: img,
         userId,
       });
 
       return res.json(news);
-    } catch (e) {
-      next(ApiError.badRequest(e.message));
+    } catch (error) {
+      next(ApiError.badRequest(error.message));
     }
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
-        const { limit, page } = req.query;
-        const limitInt = parseInt(limit, 10); // Преобразование в число
-        const pageInt = parseInt(page, 10); // Преобразование в число
-        const offset = (pageInt - 1) * limitInt;
+      const { limit = 8, page = 1 } = req.query;
+      const skip = (page - 1) * limit;
 
-        const newsAll = await News.findAndCountAll({
-            limit: limitInt,
-            offset,
-            order: [['createdAt', 'DESC']],
-        });
+      const newsAll = await News.find()
+        .limit(parseInt(limit))
+        .skip(skip)
+        .sort({ createdAt: -1 });
 
-        return res.json(newsAll);
+      return res.json(newsAll);
     } catch (error) {
-        return res.status(500).json({ error: 'Internal Server Error' });
+      next(ApiError.internalServerError(error.message));
     }
-}
+  }
 
-  async getOne(req, res) {
-    const { id } = req.params;
-
+  async getOne(req, res, next) {
     try {
-      const news = await News.findOne({ where: { id } });
+      const news = await News.findById(req.params.id);
 
       if (!news) {
-        return res.status(404).json({ error: 'News not found' });
+        return next(ApiError.notFound('News not found'));
       }
 
-      return res.json(news)
+      return res.json(news);
     } catch (error) {
-      return res.status(500).json({ error: 'Internal Server Error' });
+      next(ApiError.internal(error.message));
     }
   }
 
   async deleteOne(req, res, next) {
     try {
-      const { id } = req.params;
-      const news = await News.findOne({ where: { id } });
+      const news = await News.findById(req.params.id);
 
       if (!news) {
-        return next(ApiError.badRequest('Пост не найден'));
-      }
-
-      // Удаляем изображение из директории static
-      const filePath = path.resolve(__dirname, '..', 'static', news.img);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
+        return next(ApiError.notFound('News not found'));
       }
 
       // Удаляем запись из базы данных
-      await news.destroy();
+      await News.deleteOne({ _id: news._id });
 
       return res.json({ message: 'Пост успешно удален' });
-    } catch (e) {
-      next(ApiError.badRequest(e.message));
+    } catch (error) {
+      next(ApiError.internal(error.message));
     }
   }
 }
 
-module.exports = new NewsController()
+module.exports = new NewsController();

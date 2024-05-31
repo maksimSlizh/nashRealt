@@ -11,7 +11,7 @@ export function CreateNews({ show, onHide }) {
   const [description, setDescription] = useState('')
   const [descriptionPl, setDescriptionPl] = useState('')
   const [image, setImage] = useState('')
-  const [imagePreviewUrl, setImagePreviewUrl] = useState('')
+
 
   function changeTitle(e) {
     setTitle(e.target.value)
@@ -23,9 +23,7 @@ export function CreateNews({ show, onHide }) {
     setDescription(e.target.value)
   }
   function changeImage(e) {
-    const file = e.target.files[0]
-    setImagePreviewUrl(URL.createObjectURL(file))
-    setImage(file)
+    setImage(e.target.value)
   }
   const submitNews = (e) => {
     e.preventDefault()
@@ -49,7 +47,6 @@ export function CreateNews({ show, onHide }) {
       setDescription('')
       setDescriptionPl('')
       setImage('')
-      setImagePreviewUrl('')
       onHide()
     })
   }
@@ -116,15 +113,11 @@ export function CreateNews({ show, onHide }) {
             onChange={(e) => setDescriptionPl(e.target.value)}
           />
           <Form.Control
-            type='file'
+            value={image}
+            className='mb-3'
+            as="textarea"
             onChange={changeImage}
           />
-          {imagePreviewUrl && (
-            <Image
-              src={imagePreviewUrl}
-              width={300}
-              height={200} />
-          )}
         </Form>
       </Modal.Body>
       <Modal.Footer>

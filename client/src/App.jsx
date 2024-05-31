@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { NavbarComponent } from './components/Navbar'
 import { AppRouter } from './components/AppRouter'
-import { checkAuth } from './http/userApi'
-import { setIsAuth, setUser } from './redux/userSlice'
 import { Spinner } from 'react-bootstrap'
 import { fetchNews } from './redux/newsSlice'
 import { fetchInsurance } from './redux/insuranceSlice'
@@ -18,19 +16,7 @@ export function App() {
     dispatch(fetchNews({ page: 1 }))
     dispatch(fetchInsurance({ page: 1 }))
     dispatch(fetchRealties({ page: 1 }))
-    const fetchUser = async () => {
-      try {
-        const { data } = await checkAuth()
-        dispatch(setUser(data))
-        dispatch(setIsAuth(true))
-      } catch (error) {
-        // console.error(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchUser()
+    setLoading(false)
   }, [])
 
   if (loading) {

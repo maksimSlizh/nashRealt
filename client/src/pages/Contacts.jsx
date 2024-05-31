@@ -1,35 +1,21 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Form } from 'react-bootstrap'
 import { FaTelegramPlane, FaFacebook, FaInstagram } from "react-icons/fa"
 import { IoLogoYoutube } from "react-icons/io"
-
+const googleSheet = import.meta.env.VITE_GOOGLE_SHEET
 
 export function Contacts() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [isEmailValid, setIsEmailValid] = useState(true)
   const { t } = useTranslation()
 
-  function nameOnChange(e) {
-    setName(e.target.value)
-  }
-  function emailOnChange(e) {
-    const enteredEmail = e.target.value
-    setEmail(enteredEmail)
-
-    // Проверка валидности email
-    const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(enteredEmail)
-    setIsEmailValid(isValidEmail)
-  }
-  function messageOnChange(e) {
-    setMessage(e.target.value)
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
+    const formEle = document.querySelector('.form')
     e.preventDefault()
-    console.log(name, email, message)
+    const formData = new FormData(formEle)
+    fetch(googleSheet, {
+      method: "POST",
+      body: formData
+    })
+    formEle.reset()
+    alert(`${t('contacts.success')}`)
   }
 
 
@@ -40,37 +26,27 @@ export function Contacts() {
         <div className="contacts__content">
           <div className='contacts__message'>
             <h4 className='contacts__title mb-4'>{t('contacts.messageus')}</h4>
-            <Form >
-              <Form.Group className="mb-3" >
-                <Form.Control
-                  type="text"
-                  value={name}
-                  placeholder={t('contacts.name')}
-                  onChange={nameOnChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="email"
-                  value={email}
-                  placeholder="Email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  // Регулярное выражение для валидации email
-                  required
-                  onChange={emailOnChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  value={message}
-                  placeholder={t('contacts.message')}
-                  onChange={messageOnChange} />
-              </Form.Group>
-
-              <Button
-                onClick={handleSubmit}
-                variant="outline-success"
-                className='contacts__btn'>{t('contacts.send')}</Button>
-            </Form>
+            <form className='form' onSubmit={(e) => handleSubmit(e)}>
+              <input
+                placeholder={t('contacts.name')}
+                className='form-control mb-3'
+                name="Name"
+                type='text'
+              />
+              <input
+                placeholder='Email'
+                name="Email"
+                className='form-control mb-3'
+                type='email'
+              />
+              <textarea
+                placeholder={t('contacts.message')}
+                name="Message"
+                className="form-control mb-3"
+                rows="3"
+                type='text' />
+              <button type="submit" className="btn btn-success contacts__btn">{t('contacts.send')}</button>
+            </form>
           </div>
           <div className='contacts__info'>
             <h4 className='mb-4 contacts__title'>{t('contacts.titlesecond')}</h4>

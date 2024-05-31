@@ -14,7 +14,7 @@ export const fetchOneRealty = createAsyncThunk('realty/fetchOneRealty', async (i
 
 const initialState = {
   realties: [],
-  oneRealty: {},
+  oneRealty: [],
   totalCount: 0,
   limit: 4,
   loading: false,

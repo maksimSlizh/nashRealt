@@ -1,32 +1,26 @@
-const { Insurance } = require('../models/models')
-const ApiError = require('../error/ApiError')
-const uuid = require('uuid')
-const fs = require('fs')
-const path = require('path')
+const { Insurance } = require('../models/models');
+const ApiError = require('../error/ApiError');
 
 class InsuranceController {
   async create(req, res, next) {
     try {
-      const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId } = req.body
-      const { img, icon } = req.files
-      const fileName = uuid.v4() + '.jpg'
-      const iconFileName = uuid.v4() + '_icon.png'
-      img.mv(path.resolve(__dirname, '..', 'static', fileName))
-      icon.mv(path.resolve(__dirname, '..', 'static', iconFileName))
-      const insurance = await Insurance.create(
-        { title_ru,
-          title_pl,
-          text_ru,
-          text_pl,
-          description_ru,
-          description_pl,
-          img: fileName,
-          icon: iconFileName,
-          userId}
-        )
-      return res.json(insurance)
+      const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId, img, icon } = req.body;
+
+      const insurance = await Insurance.create({
+        title_ru,
+        title_pl,
+        text_ru,
+        text_pl,
+        description_ru,
+        description_pl,
+        img: img,
+        icon: icon,
+        user: userId // Предполагается, что userId уже есть в запросе
+      });
+
+      return res.json(insurance);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
 
@@ -34,52 +28,46 @@ class InsuranceController {
     let { limit, page } = req.query;
     page = page || 1;
     limit = limit || 8;
-    const offset = (page - 1) * limit;
+    const skip = (page - 1) * limit;
     try {
-        const insuranceAll = await Insurance.findAndCountAll({
-            limit: parseInt(limit, 10),
-            offset,
-            order: [['createdAt', 'DESC']] // Сортировка по дате создания в обратном порядке
-        });
-        return res.json(insuranceAll);
-    } catch (error) {
-        next(ApiError.internalServerError(error.message));
-    }
-}
+      const insuranceAll = await Insurance.find()
+        .limit(parseInt(limit))
+        .skip(skip)
+        .sort({ createdAt: -1 }); // Сортировка по дате создания в обратном порядке
 
-  async getOne(req, res) {
-    const { id } = req.params
-    const insurance = await Insurance.findOne({ where: { id } })
-    return res.json(insurance)
+      return res.json(insuranceAll);
+    } catch (error) {
+      next(ApiError.internal(error.message));
+    }
+  }
+
+  async getOne(req, res, next) {
+    try {
+      const insurance = await Insurance.findById(req.params.id);
+      if (!insurance) {
+        return next(ApiError.notFound('Insurance не найден'));
+      }
+      return res.json(insurance);
+    } catch (error) {
+      next(ApiError.internal(error.message));
+    }
   }
 
   async deleteOne(req, res, next) {
     try {
-      const { id } = req.params;
-      const insurance = await Insurance.findOne({ where: { id } });
-
+      const insurance = await Insurance.findById(req.params.id);
       if (!insurance) {
-        return next(ApiError.badRequest('Insurance не найден'));
-      }
-
-      // Удаляем изображение из директории static
-      const filePath = path.resolve(__dirname, '..', 'static', insurance.img);
-      const iconFilePath = path.resolve(__dirname, '..', 'static', insurance.icon);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
-      if (fs.existsSync(iconFilePath)) {
-        fs.unlinkSync(iconFilePath);
+        return next(ApiError.notFound('Insurance не найден'));
       }
 
       // Удаляем запись из базы данных
-      await insurance.destroy();
+      await Insurance.deleteOne({ _id: insurance._id });
 
       return res.json({ message: 'Insurance успешно удален' });
-    } catch (e) {
-      next(ApiError.badRequest(e.message));
+    } catch (error) {
+      next(ApiError.internal(error.message));
     }
   }
 }
 
-module.exports = new InsuranceController()
+module.exports = new InsuranceController();
