@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteRealty } from '../../http/realtyApi'
 import { fetchRealties } from '../../redux/realtySlice'
-import { jwtDecode } from 'jwt-decode'
 import { useTranslation } from 'react-i18next'
 import { generateTranslationKey } from '../../utils/i18nUtils'
 import { REALTY_ROUTE } from '../../utils/consts'
@@ -10,20 +9,12 @@ import { Card } from 'react-bootstrap'
 import noImage from '../../assets/img/noImage.webp'
 
 export function CardRealty(props = []) {
-  const { isAuth } = useSelector(state => state.user)
+  const { isAuth, user } = useSelector(state => state.user)
   const dispatch = useDispatch()
 
   const { t, i18n } = useTranslation()
 
   const titleKey = generateTranslationKey('title', i18n.language)
-
-  let userRole = ''
-  const token = localStorage.getItem('token')
-
-  if (token) {
-    const decodedToken = jwtDecode(token)
-    userRole = decodedToken.role
-  }
 
   const handleDelete = async (id) => {
     try {
@@ -52,7 +43,7 @@ export function CardRealty(props = []) {
               <Card.Text className="custom-card__text">
                 {props.price}
               </Card.Text>
-              {isAuth && userRole === 'ADMIN' &&
+              {isAuth && user.role === 'ADMIN' &&
               <button
               className='btn btn-danger card-link__delete'
               onClick={() => handleDelete(props._id)}>Удалить</button>}

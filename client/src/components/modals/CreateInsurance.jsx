@@ -36,19 +36,20 @@ export function CreateInsurance({ show, onHide }) {
     e.preventDefault()
     const userId = getUserIdFromToken()
 
-    const formData = new FormData()
-    formData.append('title_ru', title)
-    formData.append('title_pl', titlePl)
-    formData.append('text_ru', text)
-    formData.append('text_pl', textPl)
-    formData.append('description_ru', description)
-    formData.append('description_pl', descriptionPl)
-    formData.append('img', image)
-    formData.append('icon', icon)
-    formData.append('userId', userId)
+    const data = {
+      title_ru: title,
+      title_pl: titlePl,
+      text_ru: text,
+      text_pl: textPl,
+      description_ru: description,
+      description_pl: descriptionPl,
+      img: image,
+      icon: icon,
+      userId: userId
+    }
 
 
-    createInsurance(formData).then(data => {
+    createInsurance(data).then(data => {
       setTitle('')
       setTitlePl('')
       setText('')

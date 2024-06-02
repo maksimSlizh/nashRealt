@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Button, Modal, Form, Image } from 'react-bootstrap'
+import { Button, Modal, Form } from 'react-bootstrap'
 import { createNews } from '../../http/newsApi'
-import { getUserIdFromToken } from "../../helpers/index";
+import { getUserIdFromToken } from "../../helpers/index"
 
 export function CreateNews({ show, onHide }) {
   const [title, setTitle] = useState('')
@@ -29,17 +29,18 @@ export function CreateNews({ show, onHide }) {
     e.preventDefault()
 
     const userId = getUserIdFromToken()
-    const formData = new FormData()
-    formData.append('title_ru', title)
-    formData.append('title_pl', titlePl)
-    formData.append('text_ru', text)
-    formData.append('text_pl', textPl)
-    formData.append('description_ru', description)
-    formData.append('description_pl', descriptionPl)
-    formData.append('img', image)
-    formData.append('userId', userId)
+    const data = {
+      title_ru: title,
+      title_pl: titlePl,
+      text_ru: text,
+      text_pl: textPl,
+      description_ru: description,
+      description_pl: descriptionPl,
+      img: image,
+      userId
+    }
 
-    createNews(formData).then(data => {
+    createNews(data).then(data => {
       setTitle('')
       setTitlePl('')
       setText('')

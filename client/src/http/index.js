@@ -1,20 +1,14 @@
 import axios from 'axios'
 
 const $host = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_API_URL
-
+  baseURL: import.meta.env.VITE_REACT_APP_API_URL,
+  withCredentials: true // Важно для отправки куки
 })
 
 const $authHost = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_API_URL
+  baseURL: import.meta.env.VITE_REACT_APP_API_URL,
+  withCredentials: true // Важно для отправки куки
 })
-
-const authInterceptor = config => {
-  config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
-  return config
-}
-
-$authHost.interceptors.request.use(authInterceptor)
 
 export {
   $host,

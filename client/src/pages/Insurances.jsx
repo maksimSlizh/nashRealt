@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Image } from 'react-bootstrap'
 import { deleteInsurance } from '../http/insuranceApi'
 import { fetchInsurance } from '../redux/insuranceSlice'
-import { jwtDecode } from 'jwt-decode'
 import { useTranslation } from 'react-i18next'
 import { generateTranslationKey } from '../utils/i18nUtils'
 import logo from '../assets/img/logo.webp'
@@ -13,19 +12,11 @@ import { INSURANCES_ROUTE } from '../utils/consts'
 
 export function Insurances() {
   const { insurance = [] } = useSelector((state) => state.insurance)
-  const { isAuth } = useSelector(state => state.user)
+  const { isAuth, user } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
 
   const titleKey = generateTranslationKey('title', i18n.language)
-
-  let userRole = ''
-  const token = localStorage.getItem('token')
-
-  if (token) {
-    const decodedToken = jwtDecode(token)
-    userRole = decodedToken.role
-  }
 
   const handleDelete = async (id) => {
     try {
@@ -51,7 +42,7 @@ export function Insurances() {
                 alt="Нет Картинки" />
             </div>
           </div>
-          {isAuth && userRole === 'ADMIN' && (
+          {isAuth && user.role === 'ADMIN' && (
             <button key={`f${(+new Date).toString(16)} + ${Math.random()}`} className='btn btn-danger mt-5 card-link__delete' onClick={() => handleDelete(item._id)}>X</button>
           )}
         </NavLink>

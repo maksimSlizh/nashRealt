@@ -1,10 +1,12 @@
-import {jwtDecode} from "jwt-decode"
+import { jwtDecode } from "jwt-decode"
+import Cookies from 'js-cookie'
 
-export function getUserIdFromToken () {
-  const token = localStorage.getItem('token')
+export function getUserIdFromToken() {
+  const token = Cookies.get('token')
   if (token) {
     return jwtDecode(token).id
   }
+  return null
 }
 
 export const calculateItemsToDisplay = (windowWidth) => {

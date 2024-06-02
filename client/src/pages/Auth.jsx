@@ -1,37 +1,37 @@
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { setUser, setIsAuth } from '../redux/userSlice';
-import { PREW_ROUTE, REGISTRATION_ROUTE, LOGIN_ROUTE } from '../utils/consts';
-import { login, registration } from '../http/userApi';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { setUser, setIsAuth } from '../redux/userSlice'
+import { PREW_ROUTE, REGISTRATION_ROUTE, LOGIN_ROUTE } from '../utils/consts'
+import { login, registration } from '../http/userApi'
 
 export function Auth() {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const isLogin = location.pathname === LOGIN_ROUTE;
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { t } = useTranslation();
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isLogin = location.pathname === LOGIN_ROUTE
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { t } = useTranslation()
 
   const click = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      let data;
+      let data
       if (isLogin) {
-        data = await login(email, password);
+        data = await login(email, password)
       } else {
-        data = await registration(email, password);
+        data = await registration(email, password)
       }
 
-      dispatch(setUser(data));
-      dispatch(setIsAuth(true));
-      navigate(PREW_ROUTE);
+      dispatch(setUser(data))
+      dispatch(setIsAuth(true))
+      navigate(PREW_ROUTE)
     } catch (e) {
-      alert(e.response.data.message);
+      alert(e)
     }
-  };
+  }
 
   return (
     <section className='mt-4' >
@@ -91,5 +91,5 @@ export function Auth() {
       </div>
       </div>
     </section>
-  );
+  )
 }
