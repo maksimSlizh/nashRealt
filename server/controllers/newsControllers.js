@@ -6,6 +6,9 @@ class NewsController {
     try {
       const { title_ru, title_pl, text_ru, text_pl, description_ru, description_pl, userId, img } = req.body;
 
+      if (!title_ru || !title_pl || !text_ru || !text_pl || !description_ru || !description_pl || !img) {
+        return next(ApiError.badRequest('Заполните все поля'));
+      }
 
       const news = await News.create({
         title_ru,
@@ -14,8 +17,8 @@ class NewsController {
         text_pl,
         description_ru,
         description_pl,
-        img: img,
-        userId,
+        img,
+        userId
       });
 
       return res.json(news);
@@ -62,12 +65,11 @@ class NewsController {
         return next(ApiError.notFound('News not found'));
       }
 
-      // Удаляем запись из базы данных
       await News.deleteOne({ _id: news._id });
 
       return res.json({ message: 'Пост успешно удален' });
     } catch (error) {
-      next(ApiError.internal(error.message));
+      next(ApiError.internal(error.message,));
     }
   }
 }
